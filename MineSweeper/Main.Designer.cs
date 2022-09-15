@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
 			this.SettingButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
@@ -53,9 +51,6 @@
 			this.Name = "Main";
 			this.Text = "Сапёр";
 			this.ResumeLayout(false);
-=======
-=======
->>>>>>> fd9e77b5330421d0bf39d49e0e000b2b4163ed38
             this.SuspendLayout();
             // 
             // Main
@@ -66,13 +61,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Main";
             this.Text = "Сапёр";
-            this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
-<<<<<<< HEAD
->>>>>>> fd9e77b5330421d0bf39d49e0e000b2b4163ed38
-=======
->>>>>>> fd9e77b5330421d0bf39d49e0e000b2b4163ed38
-
         }
 
 		#endregion
