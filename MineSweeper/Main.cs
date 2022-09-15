@@ -17,9 +17,10 @@ namespace MineSweeper
             InitializeComponent();
         }
 
-		private void Main_Load(object sender, EventArgs e)
+		private void SettingOpenClikc(object sender, EventArgs e)
 		{
-            //проверка
+            SettingForm form = new SettingForm();
+            form.ShowDialog();
 		}
 	}
 }
