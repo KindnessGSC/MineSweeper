@@ -66,7 +66,7 @@
             this.SettingButton.TabIndex = 0;
             this.SettingButton.Text = "Настройки";
             this.SettingButton.UseVisualStyleBackColor = true;
-            this.SettingButton.Click += new System.EventHandler(this.SettingOpenClikc);
+            this.SettingButton.Click += new System.EventHandler(this.SettingOpenClick);
             // 
             // Main
             // 

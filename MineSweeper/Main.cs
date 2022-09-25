@@ -8,12 +8,13 @@ namespace MineSweeper
         public Main()
         {
             InitializeComponent();
+            FieldUserControl field = new FieldUserControl();
         }
 
-		private void SettingOpenClick(object sender, EventArgs e)
+        private void SettingOpenClick(object sender, EventArgs e)
 		{
             SettingForm form = new SettingForm();
             form.ShowDialog();
 		}
-	}
+    }
 }

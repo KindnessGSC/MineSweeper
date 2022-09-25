@@ -54,11 +54,11 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="MapUserControl.cs">
+    <Compile Include="FieldUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MapUserControl.Designer.cs">
-      <DependentUpon>MapUserControl.cs</DependentUpon>
+    <Compile Include="FieldUserControl.Designer.cs">
+      <DependentUpon>FieldUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,8 +71,8 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MapUserControl.resx">
-      <DependentUpon>MapUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="FieldUserControl.resx">
+      <DependentUpon>FieldUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

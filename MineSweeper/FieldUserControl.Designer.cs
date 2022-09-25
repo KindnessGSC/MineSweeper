@@ -1,6 +1,6 @@
 ﻿namespace MineSweeper
 {
-    partial class MapUserControl
+    partial class FieldUserControl
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
