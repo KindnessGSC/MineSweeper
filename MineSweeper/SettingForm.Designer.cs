@@ -40,15 +40,15 @@ namespace MineSweeper
 			this.flowLayoutPanel1.Controls.Add(this.CancelButton);
 			this.flowLayoutPanel1.Controls.Add(this.OkButton);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 341);
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 293);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(448, 32);
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(406, 32);
 			this.flowLayoutPanel1.TabIndex = 0;
 			// 
 			// CancelButton
 			// 
-			this.CancelButton.Location = new System.Drawing.Point(370, 3);
+			this.CancelButton.Location = new System.Drawing.Point(328, 3);
 			this.CancelButton.Name = "CancelButton";
 			this.CancelButton.Size = new System.Drawing.Size(75, 23);
 			this.CancelButton.TabIndex = 0;
@@ -58,7 +58,7 @@ namespace MineSweeper
 			// 
 			// OkButton
 			// 
-			this.OkButton.Location = new System.Drawing.Point(289, 3);
+			this.OkButton.Location = new System.Drawing.Point(247, 3);
 			this.OkButton.Name = "OkButton";
 			this.OkButton.Size = new System.Drawing.Size(75, 23);
 			this.OkButton.TabIndex = 1;
@@ -70,7 +70,7 @@ namespace MineSweeper
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(448, 373);
+			this.ClientSize = new System.Drawing.Size(406, 325);
 			this.Controls.Add(this.flowLayoutPanel1);
 			this.Name = "SettingForm";
 			this.Text = "Настройки";
