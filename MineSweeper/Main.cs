@@ -11,19 +11,6 @@ namespace MineSweeper
         {
             InitializeComponent();
             FieldUserControl field = new FieldUserControl();
-            field.GenerateField(9, 25, ClientRectangle);
-            field.Click += FieldClick;
-            Controls.Add(field);
-        }
-
-        protected override void OnSizeChanged(EventArgs e)
-        {
-            base.OnSizeChanged(e);
-        }
-
-        private void FieldClick(object sender, EventArgs e)
-        {
-            MessageBox.Show("Field is pressed!");
         }
 
         private void SettingOpenClick(object sender, EventArgs e)

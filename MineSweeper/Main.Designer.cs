@@ -28,36 +28,72 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SettingButton = new System.Windows.Forms.Button();
-            this.SuspendLayout();
-            // 
-            // SettingButton
-            // 
-            this.SettingButton.Location = new System.Drawing.Point(160, 69);
-            this.SettingButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.SettingButton.Name = "SettingButton";
-            this.SettingButton.Size = new System.Drawing.Size(625, 38);
-            this.SettingButton.TabIndex = 0;
-            this.SettingButton.Text = "Настройки";
-            this.SettingButton.UseVisualStyleBackColor = true;
-            this.SettingButton.Click += new System.EventHandler(this.SettingOpenClick);
-            // 
-            // Main
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.SettingButton);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Main";
-            this.Text = "Сапёр";
-            this.ResumeLayout(false);
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+			this.MenuButton = new System.Windows.Forms.ToolStripDropDownButton();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSettingButton = new System.Windows.Forms.ToolStripButton();
+			this.toolStrip1.SuspendLayout();
+			this.SuspendLayout();
+			// 
+			// toolStrip1
+			// 
+			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuButton,
+            this.toolStripSeparator1,
+            this.toolStripSettingButton});
+			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+			this.toolStrip1.Name = "toolStrip1";
+			this.toolStrip1.Size = new System.Drawing.Size(329, 25);
+			this.toolStrip1.TabIndex = 1;
+			this.toolStrip1.Text = "toolStrip1";
+			// 
+			// MenuButton
+			// 
+			this.MenuButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.MenuButton.Image = ((System.Drawing.Image)(resources.GetObject("MenuButton.Image")));
+			this.MenuButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.MenuButton.Name = "MenuButton";
+			this.MenuButton.Size = new System.Drawing.Size(29, 22);
+			this.MenuButton.Text = "MenuButton";
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+			// 
+			// toolStripSettingButton
+			// 
+			this.toolStripSettingButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripSettingButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSettingButton.Image")));
+			this.toolStripSettingButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripSettingButton.Name = "toolStripSettingButton";
+			this.toolStripSettingButton.Size = new System.Drawing.Size(23, 22);
+			this.toolStripSettingButton.Text = "Настройки";
+			this.toolStripSettingButton.Click += new System.EventHandler(this.SettingOpenClick);
+			// 
+			// Main
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(329, 400);
+			this.Controls.Add(this.toolStrip1);
+			this.Margin = new System.Windows.Forms.Padding(2);
+			this.Name = "Main";
+			this.Text = "Сапёр";
+			this.Load += new System.EventHandler(this.Main_Load);
+			this.toolStrip1.ResumeLayout(false);
+			this.toolStrip1.PerformLayout();
+			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
 
 		#endregion
-
-		private System.Windows.Forms.Button SettingButton;
+		private System.Windows.Forms.ToolStrip toolStrip1;
+		private System.Windows.Forms.ToolStripDropDownButton MenuButton;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripButton toolStripSettingButton;
 	}
 }
 
