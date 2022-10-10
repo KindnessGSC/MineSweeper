@@ -21,11 +21,9 @@ namespace MineSweeper
             UnknownCell
         }
 
-        private CellTypes _cellTypes; // Тип ячейки
+        public CellTypes CellType; // Тип ячейки
         private Dictionary<CellTypes, Image> _cellImages; // Спрайты ячейки
         private readonly int _cellSize; // Размер ячейки
-
-        public int CellSize { get { return _cellSize; } }
 
         /// <summary>
         /// Создает пустую ячейку.
@@ -33,7 +31,7 @@ namespace MineSweeper
         public Cell()
         {
             _cellSize = 0;
-            _cellTypes = CellTypes.UnknownCell;
+            CellType = CellTypes.UnknownCell;
             _cellImages = new Dictionary<CellTypes, Image>()
             {
                 // TODO: Задать все спрайты в зависимости от типа ячейки
@@ -45,9 +43,9 @@ namespace MineSweeper
         /// </summary>
         /// <param name="cellTypes">Тип ячейки</param>
         /// <param name="cellSize">Размер ячейки</param>
-        public Cell(CellTypes cellTypes, int cellSize)
+        public Cell(CellTypes cellType, int cellSize)
         {
-            _cellTypes = cellTypes;
+            CellType = cellType;
             _cellSize = cellSize;
         }
 
@@ -55,9 +53,9 @@ namespace MineSweeper
         /// Изменяет тип ячейки.
         /// </summary>
         /// <param name="cellTypes">Тип ячейки</param>
-        private void ChangeCellType(CellTypes cellTypes)
+        public void ChangeCellType(CellTypes cellType)
         {
-            _cellTypes = cellTypes;
+            CellType = cellType;
         }
     }
 }
