@@ -11,6 +11,8 @@ namespace MineSweeper
         {
             InitializeComponent();
             FieldUserControl field = new FieldUserControl();
+            field.Initialize(9, 25);
+            Controls.Add(field);
         }
 
         private void SettingOpenClick(object sender, EventArgs e)
@@ -23,7 +25,7 @@ namespace MineSweeper
 		{
             player = new SoundPlayer();
             player.SoundLocation = "Music1.wav";
-            player.Play();
+            //player.Play();
 		}
 	}
 }
