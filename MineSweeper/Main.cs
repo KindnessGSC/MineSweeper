@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
 using System.Media;
 
 namespace MineSweeper
@@ -10,8 +11,16 @@ namespace MineSweeper
         public Main()
         {
             InitializeComponent();
+
             FieldUserControl field = new FieldUserControl();
             field.Initialize(9, 25);
+
+            int posX = (int)((this.Width - field.Width) * 0.5);
+            int posY = (int)((this.Height - field.Height) * 0.5);
+
+            //int errorPosX = (int)();
+
+            field.Location = new Point(posX, posY);
             Controls.Add(field);
         }
 
