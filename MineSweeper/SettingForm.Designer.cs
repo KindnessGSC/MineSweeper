@@ -35,7 +35,7 @@ namespace MineSweeper
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.DifficultComboBox = new System.Windows.Forms.ComboBox();
 			this.MuzicButton = new System.Windows.Forms.Button();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -79,7 +79,7 @@ namespace MineSweeper
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.comboBox1, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.DifficultComboBox, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.MuzicButton, 1, 1);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -111,17 +111,18 @@ namespace MineSweeper
 			this.label2.TabIndex = 1;
 			this.label2.Text = "музыка:";
 			// 
-			// comboBox1
+			// DifficultComboBox
 			// 
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Items.AddRange(new object[] {
+			this.DifficultComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.DifficultComboBox.FormattingEnabled = true;
+			this.DifficultComboBox.Items.AddRange(new object[] {
             "легко",
             "нормально",
             "сложно"});
-			this.comboBox1.Location = new System.Drawing.Point(103, 3);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(94, 21);
-			this.comboBox1.TabIndex = 2;
+			this.DifficultComboBox.Location = new System.Drawing.Point(103, 3);
+			this.DifficultComboBox.Name = "DifficultComboBox";
+			this.DifficultComboBox.Size = new System.Drawing.Size(94, 21);
+			this.DifficultComboBox.TabIndex = 2;
 			// 
 			// MuzicButton
 			// 
@@ -158,7 +159,7 @@ namespace MineSweeper
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.ComboBox DifficultComboBox;
 		private System.Windows.Forms.Button MuzicButton;
 	}
 }

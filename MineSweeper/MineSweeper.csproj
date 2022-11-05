@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cell.cs" />
+    <Compile Include="InputSystem.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

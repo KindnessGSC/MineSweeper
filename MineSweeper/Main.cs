@@ -15,6 +15,7 @@ namespace MineSweeper
             FieldUserControl field = new FieldUserControl();
             field.Initialize(8, 50);
             ConfigureFieldLocation(field);
+            InputSystem.map = field;
         }
 
         private void SettingOpenClick(object sender, EventArgs e)
@@ -27,7 +28,7 @@ namespace MineSweeper
 		{
             player = new SoundPlayer();
             player.SoundLocation = "Music1.wav";
-            //player.Play();
+            player.Play();
 		}
 
         private void ConfigureFieldLocation(FieldUserControl field)
@@ -43,5 +44,10 @@ namespace MineSweeper
             field.Location = new Point(posX, posY);
             Controls.Add(field);
         }
-    }
+
+		private void Main_MouseClick(object sender, MouseEventArgs e)
+		{
+            InputSystem.CellInput(e);
+		}
+	}
 }
