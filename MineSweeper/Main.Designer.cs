@@ -63,6 +63,7 @@
 			this.MenuButton.Name = "MenuButton";
 			this.MenuButton.Size = new System.Drawing.Size(29, 22);
 			this.MenuButton.Text = "MenuButton";
+			this.MenuButton.Click += new System.EventHandler(this.MenuButton_Click);
 			// 
 			// новаяИграToolStripMenuItem
 			// 

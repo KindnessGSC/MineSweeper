@@ -2,12 +2,14 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System.Media;
+using System.Threading.Tasks;
 
 namespace MineSweeper
 {
     public partial class Main : Form
     {
         SoundPlayer player = null;
+        bool muzicPlay = true;
         public Main()
         {
             InitializeComponent();
@@ -20,15 +22,34 @@ namespace MineSweeper
 
         private void SettingOpenClick(object sender, EventArgs e)
 		{
+            //открытие и сохранение настроек
             SettingForm form = new SettingForm();
+            form.MuzicPlay = muzicPlay;
             form.ShowDialog();
+            //сохранение параметров 
+            if(form.DialogResult == DialogResult.OK)
+			{
+                //музыка
+                if (muzicPlay != form.MuzicPlay)
+                {
+                    muzicPlay = form.MuzicPlay;
+                    if (muzicPlay)
+                    {
+                        player.PlayLooping();
+                    }
+                    else
+                    {
+                        player.Stop();
+                    }
+                }
+			}
 		}
 
-		private void Main_Load(object sender, EventArgs e)
+        private void Main_Load(object sender, EventArgs e)
 		{
             player = new SoundPlayer();
             player.SoundLocation = "Music1.wav";
-            player.Play();
+            player.PlayLooping();
 		}
 
         private void ConfigureFieldLocation(FieldUserControl field)
@@ -48,6 +69,11 @@ namespace MineSweeper
 		private void Main_MouseClick(object sender, MouseEventArgs e)
 		{
             InputSystem.CellInput(e);
+		}
+
+		private void MenuButton_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
