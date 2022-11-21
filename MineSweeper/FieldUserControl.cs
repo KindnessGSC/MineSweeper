@@ -18,6 +18,9 @@ namespace MineSweeper
         private Button[,] _cells; // Ячейки
         private Image _spriteSet; // Спрайты
 
+        private int currentPictureToSet = 0;
+        private Point firstCoord;
+
         private bool isFirstStep;
         
         /// <summary>
@@ -48,6 +51,7 @@ namespace MineSweeper
         /// </summary>
         public void Initialize(int cellCount, int cellSize)
         {
+            currentPictureToSet = 0;
             isFirstStep = true;
             _spriteSet = new Bitmap(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.FullName.ToString(), "Sprites\\tiles.png"));
             GenerateField(cellCount, cellSize);
@@ -99,6 +103,88 @@ namespace MineSweeper
             Size = new Size(_fieldSize, _fieldSize);
         }
 
+        private void OnButtonPressedMouse(object sender, MouseEventArgs e)
+        {
+            Button pressedButton = sender as Button;
+            switch (e.Button.ToString())
+            {
+                case "Right":
+                    OnRightButtonPressed(pressedButton);
+                    break;
+                case "Left":
+                    OnLeftButtonPressed(pressedButton);
+                    break;
+            }
+        }
+
+        private void OnRightButtonPressed(Button pressedButton)
+        {
+            currentPictureToSet++;
+            currentPictureToSet %= 3;
+            int posX = 0;
+            int posY = 0;
+            switch (currentPictureToSet)
+            {
+                case 0:
+                    posX = 0;
+                    posY = 0;
+                    break;
+                case 1:
+                    posX = 0;
+                    posY = 2;
+                    break;
+                case 2:
+                    posX = 2;
+                    posY = 2;
+                    break;
+            }
+            pressedButton.Image = FindNeededImage(posX, posY);
+        }
+
+        private void OnLeftButtonPressed(Button pressedButton)
+        {
+            pressedButton.Enabled = false;
+            int iButton = pressedButton.Location.Y / _cellSize;
+            int jButton = pressedButton.Location.X / _cellSize;
+            if (isFirstStep)
+            {
+                firstCoord = new Point(jButton, iButton);
+                SeedMap();
+                CountCellBomb();
+                isFirstStep = false;
+            }
+            OpenCells(iButton, jButton);
+
+            if (_field[iButton, jButton] == -1)
+            {
+                ShowAllBombs(iButton, jButton);
+                MessageBox.Show("Поражение!");
+                Controls.Clear();
+            }
+        }
+
+        private void CountCellBomb()
+        {
+            for (int i = 0; i < _fieldSize; i++)
+            {
+                for (int j = 0; j < _fieldSize; j++)
+                {
+                    if (_field[i, j] == -1)
+                    {
+                        for (int k = i - 1; k < i + 2; k++)
+                        {
+                            for (int l = j - 1; l < j + 2; l++)
+                            {
+                                if (!IsInBorder(k, l) || _field[k, l] == -1)
+                                    continue;
+                                _field[k, l] = _field[k, l] + 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private void SetImages(int cellCount, int cellSize)
         {
             _cells = new Button[_cellCount, _cellCount];
@@ -110,9 +196,88 @@ namespace MineSweeper
                     Button cell = new Button();
                     cell.Location = new Point(j * cellSize, i * cellSize);
                     cell.Size = new Size(cellSize, cellSize);
-                    cell.Image = FindNeededImage(0, 2);
+                    cell.Image = FindNeededImage(0, 0);
+                    cell.MouseUp += new MouseEventHandler(OnButtonPressedMouse);
                     Controls.Add(cell);
                     _cells[i, j] = cell;
+                }
+            }
+        }
+
+        private void OpenCell(int i, int j)
+        {
+            _cells[i, j].Enabled = false;
+
+            switch (_field[i, j])
+            {
+                case 1:
+                    _cells[i, j].Image = FindNeededImage(1, 0);
+                    break;
+                case 2:
+                    _cells[i, j].Image = FindNeededImage(2, 0);
+                    break;
+                case 3:
+                    _cells[i, j].Image = FindNeededImage(3, 0);
+                    break;
+                case 4:
+                    _cells[i, j].Image = FindNeededImage(4, 0);
+                    break;
+                case 5:
+                    _cells[i, j].Image = FindNeededImage(0, 1);
+                    break;
+                case 6:
+                    _cells[i, j].Image = FindNeededImage(1, 1);
+                    break;
+                case 7:
+                    _cells[i, j].Image = FindNeededImage(2, 1);
+                    break;
+                case 8:
+                    _cells[i, j].Image = FindNeededImage(3, 1);
+                    break;
+                case -1:
+                    _cells[i, j].Image = FindNeededImage(1, 2);
+                    break;
+                case 0:
+                    _cells[i, j].Image = FindNeededImage(0, 0);
+                    break;
+            }
+        }
+
+        private void OpenCells(int i, int j)
+        {
+            OpenCell(i, j);
+
+            if (_field[i, j] > 0)
+                return;
+
+            for (int k = i - 1; k < i + 2; k++)
+            {
+                for (int l = j - 1; l < j + 2; l++)
+                {
+                    if (!IsInBorder(k, l))
+                        continue;
+                    if (!_cells[k, l].Enabled)
+                        continue;
+                    if (_field[k, l] == 0)
+                        OpenCells(k, l);
+                    else if (_field[k, l] > 0)
+                        OpenCell(k, l);
+                }
+            }
+        }
+
+        private void ShowAllBombs(int iBomb, int jBomb)
+        {
+            for (int i = 0; i < _fieldSize; i++)
+            {
+                for (int j = 0; j < _fieldSize; j++)
+                {
+                    if (i == iBomb && j == jBomb)
+                        continue;
+                    if (_field[i, j] == -1)
+                    {
+                        _cells[i, j].Image = FindNeededImage(3, 2);
+                    }
                 }
             }
         }
@@ -123,6 +288,15 @@ namespace MineSweeper
             Graphics g = Graphics.FromImage(image);
             g.DrawImage(_spriteSet, new Rectangle(new Point(0, 0), new Size(_cellSize, _cellSize)), 0 + 32 * xPos, 0 + 32 * yPos, 33, 33, GraphicsUnit.Pixel);
             return image;
+        }
+
+        private bool IsInBorder(int i, int j)
+        {
+            if (i < 0 || j < 0 || j > _fieldSize - 1 || i > _fieldSize - 1)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
