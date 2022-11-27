@@ -32,10 +32,10 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.MenuButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.новаяИграToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сбросТекущейИгрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Leaderboard = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSettingButton = new System.Windows.Forms.ToolStripButton();
+            this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,8 +56,8 @@
             this.MenuButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.MenuButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.новаяИграToolStripMenuItem,
-            this.сбросТекущейИгрыToolStripMenuItem,
-            this.Leaderboard});
+            this.Leaderboard,
+            this.Exit});
             this.MenuButton.Image = ((System.Drawing.Image)(resources.GetObject("MenuButton.Image")));
             this.MenuButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MenuButton.Name = "MenuButton";
@@ -70,12 +70,6 @@
             this.новаяИграToolStripMenuItem.Name = "новаяИграToolStripMenuItem";
             this.новаяИграToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.новаяИграToolStripMenuItem.Text = "Новая игра";
-            // 
-            // сбросТекущейИгрыToolStripMenuItem
-            // 
-            this.сбросТекущейИгрыToolStripMenuItem.Name = "сбросТекущейИгрыToolStripMenuItem";
-            this.сбросТекущейИгрыToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.сбросТекущейИгрыToolStripMenuItem.Text = "Сброс текущей игры";
             // 
             // Leaderboard
             // 
@@ -98,6 +92,13 @@
             this.toolStripSettingButton.Size = new System.Drawing.Size(23, 22);
             this.toolStripSettingButton.Text = "Настройки";
             this.toolStripSettingButton.Click += new System.EventHandler(this.SettingOpenClick);
+            // 
+            // Exit
+            // 
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(192, 22);
+            this.Exit.Text = "Выход";
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // Main
             // 
@@ -123,8 +124,8 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripButton toolStripSettingButton;
         private System.Windows.Forms.ToolStripMenuItem новаяИграToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem сбросТекущейИгрыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Leaderboard;
+        private System.Windows.Forms.ToolStripMenuItem Exit;
     }
 }
 

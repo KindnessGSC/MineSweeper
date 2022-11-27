@@ -83,5 +83,10 @@ namespace MineSweeper
             CSFormLeaderboards form = new CSFormLeaderboards();
             form.ShowDialog();
         }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
