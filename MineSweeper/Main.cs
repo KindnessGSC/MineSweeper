@@ -73,7 +73,15 @@ namespace MineSweeper
 
 		private void MenuButton_Click(object sender, EventArgs e)
 		{
+           
 
-		}
-	}
+        }
+
+        private void Leaderboard_Click(object sender, EventArgs e)
+        {
+            //открытие таблицы лидеров
+            CSFormLeaderboards form = new CSFormLeaderboards();
+            form.ShowDialog();
+        }
+    }
 }
