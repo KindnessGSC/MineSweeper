@@ -30,7 +30,7 @@ namespace MineSweeper
 		private void InitializeComponent()
 		{
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-			this.CancelButton = new System.Windows.Forms.Button();
+			this.cancelButton = new System.Windows.Forms.Button();
 			this.OkButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.label1 = new System.Windows.Forms.Label();
@@ -43,7 +43,7 @@ namespace MineSweeper
 			// 
 			// flowLayoutPanel1
 			// 
-			this.flowLayoutPanel1.Controls.Add(this.CancelButton);
+			this.flowLayoutPanel1.Controls.Add(this.cancelButton);
 			this.flowLayoutPanel1.Controls.Add(this.OkButton);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 157);
@@ -54,13 +54,13 @@ namespace MineSweeper
 			// 
 			// CancelButton
 			// 
-			this.CancelButton.Location = new System.Drawing.Point(229, 3);
-			this.CancelButton.Name = "CancelButton";
-			this.CancelButton.Size = new System.Drawing.Size(75, 23);
-			this.CancelButton.TabIndex = 0;
-			this.CancelButton.Text = "Отмена";
-			this.CancelButton.UseVisualStyleBackColor = true;
-			this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+			this.cancelButton.Location = new System.Drawing.Point(229, 3);
+			this.cancelButton.Name = "CancelButton";
+			this.cancelButton.Size = new System.Drawing.Size(75, 23);
+			this.cancelButton.TabIndex = 0;
+			this.cancelButton.Text = "Отмена";
+			this.cancelButton.UseVisualStyleBackColor = true;
+			this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
 			// 
 			// OkButton
 			// 
@@ -154,7 +154,7 @@ namespace MineSweeper
 		#endregion
 
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-		private System.Windows.Forms.Button CancelButton;
+		private System.Windows.Forms.Button cancelButton;
 		private System.Windows.Forms.Button OkButton;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.Label label1;

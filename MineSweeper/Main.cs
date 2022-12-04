@@ -48,8 +48,8 @@ namespace MineSweeper
         private void Main_Load(object sender, EventArgs e)
 		{
             player = new SoundPlayer();
-            player.SoundLocation = "Music1.wav";
-            player.PlayLooping();
+            //player.SoundLocation = "Music1.wav";
+            //player.PlayLooping();
 		}
 
         private void ConfigureFieldLocation(FieldUserControl field)
@@ -73,7 +73,20 @@ namespace MineSweeper
 
 		private void MenuButton_Click(object sender, EventArgs e)
 		{
+           
 
-		}
-	}
+        }
+
+        private void Leaderboard_Click(object sender, EventArgs e)
+        {
+            //открытие таблицы лидеров
+            CSFormLeaderboards form = new CSFormLeaderboards();
+            form.ShowDialog();
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+    }
 }
