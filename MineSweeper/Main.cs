@@ -8,7 +8,7 @@ namespace MineSweeper
 {
     public partial class Main : Form
     {
-        SoundPlayer player = null;
+        SoundPlayer muzicPlayer = null;
         bool muzicPlay = true;
         public Main()
         {
@@ -35,11 +35,11 @@ namespace MineSweeper
                     muzicPlay = form.MuzicPlay;
                     if (muzicPlay)
                     {
-                        player.PlayLooping();
+                        muzicPlayer.PlayLooping();
                     }
                     else
                     {
-                        player.Stop();
+                        muzicPlayer.Stop();
                     }
                 }
 			}
@@ -47,10 +47,10 @@ namespace MineSweeper
 
         private void Main_Load(object sender, EventArgs e)
 		{
-            player = new SoundPlayer();
-            //player.SoundLocation = "Music1.wav";
-            //player.PlayLooping();
-		}
+            muzicPlayer = new SoundPlayer();
+            //muzicPlayer.SoundLocation = "Music1.wav";
+            //muzicPlayer.PlayLooping();
+        }
 
         private void ConfigureFieldLocation(FieldUserControl field)
         {
