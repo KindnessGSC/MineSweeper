@@ -48,8 +48,8 @@ namespace MineSweeper
         private void Main_Load(object sender, EventArgs e)
 		{
             muzicPlayer = new SoundPlayer();
-            //muzicPlayer.SoundLocation = "Music1.wav";
-            //muzicPlayer.PlayLooping();
+            muzicPlayer.SoundLocation = "Music1.wav";
+            muzicPlayer.PlayLooping();
         }
 
         private void ConfigureFieldLocation(FieldUserControl field)
