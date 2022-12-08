@@ -13,6 +13,7 @@ namespace MineSweeper
         public MainForm()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
 
             FieldUserControl field = new FieldUserControl(1, 35);
             field.GenerateField();
@@ -23,15 +24,15 @@ namespace MineSweeper
 		{
             //открытие и сохранение настроек
             SettingForm form = new SettingForm();
-            form.MuzicPlay = muzicPlay;
+            form.MusicPlay = muzicPlay;
             form.ShowDialog();
             //сохранение параметров 
             if(form.DialogResult == DialogResult.OK)
 			{
                 //музыка
-                if (muzicPlay != form.MuzicPlay)
+                if (muzicPlay != form.MusicPlay)
                 {
-                    muzicPlay = form.MuzicPlay;
+                    muzicPlay = form.MusicPlay;
                     if (muzicPlay)
                     {
                         muzicPlayer.PlayLooping();
@@ -48,8 +49,16 @@ namespace MineSweeper
 		{
             string musicPath = "Music1.wav";
             muzicPlayer = new SoundPlayer();
-            muzicPlayer.SoundLocation = "Music1.wav";
-            muzicPlayer.PlayLooping();
+            
+            try
+            {
+                muzicPlayer.SoundLocation = musicPath;
+                muzicPlayer.PlayLooping();
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         private void ConfigureFieldLocation(FieldUserControl field)
@@ -61,7 +70,7 @@ namespace MineSweeper
 
             int errorPosX = (int)(posX * 0.25) + 1;
             posX -= errorPosX;
-                                
+
             field.Location = new Point(posX, posY);
             Controls.Add(field);
         }

@@ -5,7 +5,7 @@ namespace MineSweeper
 {
 	public partial class SettingForm : Form
 	{
-		public bool MuzicPlay;
+		public bool MusicPlay;
 
 		public SettingForm()
 		{
@@ -36,13 +36,13 @@ namespace MineSweeper
 
 		private void MuzicButton_Click(object sender, EventArgs e)
 		{
-			MuzicPlay = !MuzicPlay;
+			MusicPlay = !MusicPlay;
 			MuzicButtonChange();
 		}
 
 		private void MuzicButtonChange()
 		{
-			if (MuzicPlay)
+			if (MusicPlay)
 				MuzicButton.Text = "Вкл";
 			else
 				MuzicButton.Text = "Выкл";
