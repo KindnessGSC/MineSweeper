@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 
 namespace MineSweeper
@@ -12,25 +12,27 @@ namespace MineSweeper
     public partial class FieldUserControl : UserControl
     {
         private int _fieldSize; // Размер поля
-        private int _cellCount; // Количество ячеек
+        private int _cellsCount; // Количество ячеек на поле
+        private int _fieldDifficultlyIndex; // Индекс уровеня сложности поля
+        private Dictionary<int, int> _fieldDifficulty; // Уровень сложности поля
+
         private int _cellSize; // Размер ячейки
-        private int[,] _field; // Поле
-        private Button[,] _cells; // Ячейки
-        private Image _spriteSet; // Спрайты
+        private Cell[,] _field; // Поле ячеек
 
-        private int currentPictureToSet = 0;
-        private Point firstCoord;
-
-        private bool isFirstStep;
+        private bool _isStarted = false; // Состояние игры (Запущена)
         
         /// <summary>
         /// Возвращает общее количество ячеек.
         /// </summary>
-        public int CellCount { get { return _cellCount; } }
+        public int CellsCount { get { return _cellsCount; } }
         /// <summary>
         /// Возвращает размер поля.
         /// </summary>
         public int FieldSize { get { return _fieldSize; } }
+        /// <summary>
+        /// Возвращает уровень сложности.
+        /// </summary>
+        public int FieldDifficultly { get { return _fieldDifficultlyIndex; } }
 
         /// <summary>
         /// Создает пустое поле для игры.
@@ -39,264 +41,200 @@ namespace MineSweeper
         {
             InitializeComponent();
             _fieldSize = 0;
-            _cellCount = 0;
+            _cellsCount = 0;
             _field = null;
-            _cells = null;
             _cellSize = 0;
+            _fieldDifficultlyIndex = 0;
+            _fieldDifficulty = null;
             Size = new Size(_fieldSize, _fieldSize);
         }
 
         /// <summary>
-        /// Инициализация поля.
+        /// Создает поле для игры.
         /// </summary>
-        public void Initialize(int cellCount, int cellSize)
+        /// <param name="fieldDifficulty">Уровень сложности поля</param>
+        /// <param name="cellSize">Размер одной ячейки</param>
+        public FieldUserControl(int fieldDifficulty, int cellSize) : base()
         {
-            currentPictureToSet = 0;
-            isFirstStep = true;
-            _spriteSet = new Bitmap(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.FullName.ToString(), "Sprites\\tiles.png"));
-            GenerateField(cellCount, cellSize);
+            _fieldDifficultlyIndex = fieldDifficulty > 0 && fieldDifficulty <= 3 ? fieldDifficulty : _fieldDifficultlyIndex;
+            _cellSize = cellSize > 0 ? cellSize : _cellSize;
         }
 
         /// <summary>
-        /// Генерирует поле размером, в зависимости от размера ячейки и установленного уровня сложности.
+        /// Генерирует игровое поле.
         /// </summary>
-        /// <param name="cellCount">Количество ячеек (Уровень сложности)</param>
-        /// <param name="cellSize">Размер ячейки</param>
-        private void GenerateField(int cellCount, int cellSize)
+        public void GenerateField()
         {
-            SetFieldSize(cellCount, cellSize);
-            SetImages(cellCount, cellSize);
-        }
-
-        private void SeedMap()
-        {
-            Random rnd = new Random();
-            int number = rnd.Next(5, 10);
-
-            for (int i = 0; i < number; i++)
+            if (_fieldDifficulty == null)
             {
-                int posX = rnd.Next(0, _fieldSize - 1);
-                int posY = rnd.Next(0, _fieldSize - 1);
-
-                while(_field[posY, posX] == -1)
+                _fieldDifficulty = new Dictionary<int, int>
                 {
-                    posX = rnd.Next(0, _fieldSize - 1);
-                    posY = rnd.Next(0, _fieldSize - 1);
-                }
-
-                _field[posY, posX] = -1;
+                    { 1, 9 },
+                    { 2, 12 },
+                    { 3, 16 }
+                };
             }
+
+            _fieldDifficulty.TryGetValue(_fieldDifficultlyIndex, out _cellsCount);
+
+            SetFieldSize(_cellsCount, _cellSize);
+            GenerateCells(_cellsCount, _cellSize);
         }
 
         /// <summary>
-        /// Устанавливает размер поля.
+        /// Генерирует игровое поле размером, в зависимости от установленного уровня сложности.
         /// </summary>
-        /// <param name="cellCount">Количество клеток</param>
-        private void SetFieldSize(int cellCount, int cellSize)
+        public void GenerateField(int fieldDifficultly)
         {
-            _cellCount = (cellCount > 0) ? cellCount : _cellCount;
+            _fieldDifficultlyIndex = fieldDifficultly > 0 && fieldDifficultly <= 3 ? fieldDifficultly : _fieldDifficultlyIndex;
+
+            if (_fieldDifficulty == null)
+            {
+                _fieldDifficulty = new Dictionary<int, int>
+                {
+                    { 1, 9 },
+                    { 2, 12 },
+                    { 3, 16 }
+                };
+            }
+
+            _fieldDifficulty.TryGetValue(_fieldDifficultlyIndex, out _cellsCount);
+
+            SetFieldSize(_cellsCount, _cellSize);
+            GenerateCells(_cellsCount, _cellSize);
+        }
+
+        private void SetFieldSize(int cellsCount, int cellSize)
+        {
+            _cellsCount = (cellsCount > 0) ? cellsCount : _cellsCount;
             _cellSize = (cellSize > 0) ? cellSize : _cellSize;
-            _field = new int[_cellCount, _cellCount];
+            _field = new Cell[_cellsCount, _cellsCount];
 
             // Вычисление размера поля
-            _fieldSize = _cellSize * cellCount;
+            _fieldSize = _cellSize * _cellsCount;
             Size = new Size(_fieldSize, _fieldSize);
         }
 
-        private void OnButtonPressedMouse(object sender, MouseEventArgs e)
+        private void Explode()
         {
-            Button pressedButton = sender as Button;
-            switch (e.Button.ToString())
+            for (int i = 0; i < _cellsCount; i++)
             {
-                case "Right":
-                    OnRightButtonPressed(pressedButton);
-                    break;
-                case "Left":
-                    OnLeftButtonPressed(pressedButton);
-                    break;
-            }
-        }
-
-        private void OnRightButtonPressed(Button pressedButton)
-        {
-            currentPictureToSet++;
-            currentPictureToSet %= 3;
-            int posX = 0;
-            int posY = 0;
-            switch (currentPictureToSet)
-            {
-                case 0:
-                    posX = 0;
-                    posY = 0;
-                    break;
-                case 1:
-                    posX = 0;
-                    posY = 2;
-                    break;
-                case 2:
-                    posX = 2;
-                    posY = 2;
-                    break;
-            }
-            pressedButton.Image = FindNeededImage(posX, posY);
-        }
-
-        private void OnLeftButtonPressed(Button pressedButton)
-        {
-            pressedButton.Enabled = false;
-            int iButton = pressedButton.Location.Y / _cellSize;
-            int jButton = pressedButton.Location.X / _cellSize;
-            if (isFirstStep)
-            {
-                firstCoord = new Point(jButton, iButton);
-                SeedMap();
-                CountCellBomb();
-                isFirstStep = false;
-            }
-            OpenCells(iButton, jButton);
-
-            if (_field[iButton, jButton] == -1)
-            {
-                ShowAllBombs(iButton, jButton);
-                MessageBox.Show("Поражение!");
-                Controls.Clear();
-            }
-        }
-
-        private void CountCellBomb()
-        {
-            for (int i = 0; i < _fieldSize; i++)
-            {
-                for (int j = 0; j < _fieldSize; j++)
+                for (int j = 0; j < _cellsCount; j++)
                 {
-                    if (_field[i, j] == -1)
+                    if (_field[i, j].IsBomb)
                     {
-                        for (int k = i - 1; k < i + 2; k++)
-                        {
-                            for (int l = j - 1; l < j + 2; l++)
-                            {
-                                if (!IsInBorder(k, l) || _field[k, l] == -1)
-                                    continue;
-                                _field[k, l] = _field[k, l] + 1;
-                            }
-                        }
+                        _field[i, j].Font = new Font("Arial", 24);
+                        _field[i, j].Text = "*";
+                    }
+                }
+            }
+
+            MessageBox.Show("Вы проиграли! :(");
+
+            for (int i = 0; i < _cellsCount; i++)
+            {
+                for (int j = 0; j < _cellsCount; j++)
+                {
+                    Controls.Remove(_field[i, j]);
+                }
+            }
+
+            GenerateCells(_cellsCount, _cellSize);
+        }
+
+        private void OpenCell(Cell cell)
+        {
+            for (int x = 0; x < _cellsCount; x++)
+            {
+                for (int y = 0; y < _cellsCount; y++)
+                {
+                    if (_field[x, y] == cell)
+                    {
+                        cell.Text = CountBombsAround(x, y).ToString();
                     }
                 }
             }
         }
 
-        private void SetImages(int cellCount, int cellSize)
+        private int CountBombsAround(int xC, int yC)
         {
-            _cells = new Button[_cellCount, _cellCount];
+            int bombsCount = 0;
 
-            for (int i = 0; i < cellCount; i++)
+            for (int x = xC - 1; x <= xC + 1; x++)
             {
-                for (int j = 0; j < cellCount; j++)
+                for (int y = yC - 1; y < yC + 1; y++)
                 {
-                    Button cell = new Button();
-                    cell.Location = new Point(j * cellSize, i * cellSize);
-                    cell.Size = new Size(cellSize, cellSize);
-                    cell.Image = FindNeededImage(0, 0);
-                    cell.MouseUp += new MouseEventHandler(OnButtonPressedMouse);
-                    Controls.Add(cell);
-                    _cells[i, j] = cell;
-                }
-            }
-        }
-
-        private void OpenCell(int i, int j)
-        {
-            _cells[i, j].Enabled = false;
-
-            switch (_field[i, j])
-            {
-                case 1:
-                    _cells[i, j].Image = FindNeededImage(1, 0);
-                    break;
-                case 2:
-                    _cells[i, j].Image = FindNeededImage(2, 0);
-                    break;
-                case 3:
-                    _cells[i, j].Image = FindNeededImage(3, 0);
-                    break;
-                case 4:
-                    _cells[i, j].Image = FindNeededImage(4, 0);
-                    break;
-                case 5:
-                    _cells[i, j].Image = FindNeededImage(0, 1);
-                    break;
-                case 6:
-                    _cells[i, j].Image = FindNeededImage(1, 1);
-                    break;
-                case 7:
-                    _cells[i, j].Image = FindNeededImage(2, 1);
-                    break;
-                case 8:
-                    _cells[i, j].Image = FindNeededImage(3, 1);
-                    break;
-                case -1:
-                    _cells[i, j].Image = FindNeededImage(1, 2);
-                    break;
-                case 0:
-                    _cells[i, j].Image = FindNeededImage(0, 0);
-                    break;
-            }
-        }
-
-        private void OpenCells(int i, int j)
-        {
-            OpenCell(i, j);
-
-            if (_field[i, j] > 0)
-                return;
-
-            for (int k = i - 1; k < i + 2; k++)
-            {
-                for (int l = j - 1; l < j + 2; l++)
-                {
-                    if (!IsInBorder(k, l))
-                        continue;
-                    if (!_cells[k, l].Enabled)
-                        continue;
-                    if (_field[k, l] == 0)
-                        OpenCells(k, l);
-                    else if (_field[k, l] > 0)
-                        OpenCell(k, l);
-                }
-            }
-        }
-
-        private void ShowAllBombs(int iBomb, int jBomb)
-        {
-            for (int i = 0; i < _fieldSize; i++)
-            {
-                for (int j = 0; j < _fieldSize; j++)
-                {
-                    if (i == iBomb && j == jBomb)
-                        continue;
-                    if (_field[i, j] == -1)
+                    if(x >= 0 && x < _cellsCount && y >= 0 && y < _cellsCount)
                     {
-                        _cells[i, j].Image = FindNeededImage(3, 2);
+                        if (_field[x, y].IsBomb) bombsCount++;
                     }
                 }
             }
+
+            return bombsCount;
         }
 
-        private Image FindNeededImage(int xPos, int yPos)
+        private void CellClick(object sender, EventArgs e)
         {
-            Image image = new Bitmap(_cellSize, _cellSize);
-            Graphics g = Graphics.FromImage(image);
-            g.DrawImage(_spriteSet, new Rectangle(new Point(0, 0), new Size(_cellSize, _cellSize)), 0 + 32 * xPos, 0 + 32 * yPos, 33, 33, GraphicsUnit.Pixel);
-            return image;
-        }
+            Cell cell = sender as Cell;
+            int bombsCount = (int)(FieldSize / CellsCount * 0.5 * _fieldDifficultlyIndex);
 
-        private bool IsInBorder(int i, int j)
-        {
-            if (i < 0 || j < 0 || j > _fieldSize - 1 || i > _fieldSize - 1)
+            if (!_isStarted)
             {
-                return false;
+                _isStarted = true;
+                GenerateBombs(cell, bombsCount);
             }
-            return true;
+
+            if (cell.IsBomb)
+            {
+                _isStarted = false;
+                Explode();
+            }
+            else
+            {
+                OpenCell(cell);
+            }
+        }
+
+        private void GenerateCells(int cellsCount, int cellSize)
+        {
+            for (int i = 0; i < _cellsCount; i++)
+            {
+                for (int j = 0; j < _cellsCount; j++)
+                {
+                    Cell cell = new Cell();
+
+                    int x = j * _cellSize;
+                    int y = i * _cellSize;
+
+                    cell.Size = new Size(_cellSize, _cellSize);
+                    cell.Location = new Point(x, y);
+
+                    cell.Click += CellClick;
+                    _field[i, j] = cell;
+                    Controls.Add(_field[i, j]);
+                }
+            }
+        }
+
+        private void GenerateBombs(Cell cell, int bombsCount)
+        {
+            Random rnd = new Random(DateTime.Now.Millisecond);
+
+            if (_isStarted)
+            {
+                while(bombsCount > 0)
+                {
+                    int x = rnd.Next(0, _cellsCount);
+                    int y = rnd.Next(0, _cellsCount);
+
+                    if (_field[x, y] != cell && !_field[x, y].IsBomb)
+                    {
+                        _field[x, y].IsBomb = true;
+                        bombsCount--;
+                    }
+                }
+            }
         }
     }
 }

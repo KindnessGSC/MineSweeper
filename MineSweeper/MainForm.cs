@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace MineSweeper
 {
-    public partial class Main : Form
+    public partial class MainForm : Form
     {
         SoundPlayer player = null;
         bool muzicPlay = true;
-        public Main()
+        public MainForm()
         {
             InitializeComponent();
 
-            FieldUserControl field = new FieldUserControl();
-            field.Initialize(8, 50);
+            FieldUserControl field = new FieldUserControl(1, 35);
+            field.GenerateField();
             ConfigureFieldLocation(field);
             InputSystem.map = field;
         }
@@ -61,7 +61,7 @@ namespace MineSweeper
 
             int errorPosX = (int)(posX * 0.25) + 1;
             posX -= errorPosX;
-
+                                
             field.Location = new Point(posX, posY);
             Controls.Add(field);
         }

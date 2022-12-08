@@ -1,6 +1,6 @@
 ﻿namespace MineSweeper
 {
-    partial class Main
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.MenuButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.новаяИграToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
