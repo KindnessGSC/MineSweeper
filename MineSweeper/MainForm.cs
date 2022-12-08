@@ -8,7 +8,7 @@ namespace MineSweeper
 {
     public partial class MainForm : Form
     {
-        SoundPlayer player = null;
+        SoundPlayer muzicPlayer = null;
         bool muzicPlay = true;
         public MainForm()
         {
@@ -17,7 +17,6 @@ namespace MineSweeper
             FieldUserControl field = new FieldUserControl(1, 35);
             field.GenerateField();
             ConfigureFieldLocation(field);
-            InputSystem.map = field;
         }
 
         private void SettingOpenClick(object sender, EventArgs e)
@@ -35,11 +34,11 @@ namespace MineSweeper
                     muzicPlay = form.MuzicPlay;
                     if (muzicPlay)
                     {
-                        player.PlayLooping();
+                        muzicPlayer.PlayLooping();
                     }
                     else
                     {
-                        player.Stop();
+                        muzicPlayer.Stop();
                     }
                 }
 			}
@@ -47,10 +46,11 @@ namespace MineSweeper
 
         private void Main_Load(object sender, EventArgs e)
 		{
-            player = new SoundPlayer();
-            //player.SoundLocation = "Music1.wav";
-            //player.PlayLooping();
-		}
+            string musicPath = "Music1.wav";
+            muzicPlayer = new SoundPlayer();
+            muzicPlayer.SoundLocation = "Music1.wav";
+            muzicPlayer.PlayLooping();
+        }
 
         private void ConfigureFieldLocation(FieldUserControl field)
         {
@@ -66,11 +66,6 @@ namespace MineSweeper
             Controls.Add(field);
         }
 
-		private void Main_MouseClick(object sender, MouseEventArgs e)
-		{
-            InputSystem.CellInput(e);
-		}
-
 		private void MenuButton_Click(object sender, EventArgs e)
 		{
            
@@ -82,6 +77,11 @@ namespace MineSweeper
             //открытие таблицы лидеров
             CSFormLeaderboards form = new CSFormLeaderboards();
             form.ShowDialog();
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
