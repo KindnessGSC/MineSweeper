@@ -32,7 +32,7 @@ namespace MineSweeper
         /// <summary>
         /// Возвращает уровень сложности.
         /// </summary>
-        public int FieldDifficultly { get { return _fieldDifficultlyIndex; } }
+        public int FieldDifficultly { get { return _fieldDifficultlyIndex; } set { _fieldDifficultlyIndex = value; } }
 
         /// <summary>
         /// Создает пустое поле для игры.

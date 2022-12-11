@@ -6,15 +6,18 @@ namespace MineSweeper
 	public partial class SettingForm : Form
 	{
 		public bool MusicPlay;
+		public int difficult;
 
 		public SettingForm()
 		{
 			InitializeComponent();
+			
 		}
 
 		private void SettingForm_Load(object sender, EventArgs e)
 		{
 			MuzicButtonChange();
+			DifficultComboBox.SelectedIndex = difficult;
 		}
 
 		private void CancelButton_Click(object sender, EventArgs e)
@@ -26,6 +29,7 @@ namespace MineSweeper
 		private void OkClick(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
+			difficult = DifficultComboBox.SelectedIndex;
 			this.Close();
 		}
 

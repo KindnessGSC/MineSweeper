@@ -8,6 +8,7 @@ namespace MineSweeper
 {
     public partial class MainForm : Form
     {
+        FieldUserControl field; //поле
         SoundPlayer muzicPlayer = null;
         bool muzicPlay = true;
         public MainForm()
@@ -15,7 +16,7 @@ namespace MineSweeper
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
 
-            FieldUserControl field = new FieldUserControl(1, 35);
+            field = new FieldUserControl(1, 35);
             field.GenerateField();
             ConfigureFieldLocation(field);
         }
@@ -25,6 +26,7 @@ namespace MineSweeper
             //открытие и сохранение настроек
             SettingForm form = new SettingForm();
             form.MusicPlay = muzicPlay;
+            form.difficult = field.FieldDifficultly;
             form.ShowDialog();
             //сохранение параметров 
             if(form.DialogResult == DialogResult.OK)
@@ -42,6 +44,7 @@ namespace MineSweeper
                         muzicPlayer.Stop();
                     }
                 }
+                field.FieldDifficultly = form.difficult;
 			}
 		}
 
