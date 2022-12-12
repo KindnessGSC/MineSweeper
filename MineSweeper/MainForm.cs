@@ -97,8 +97,7 @@ namespace MineSweeper
            "Сообщение",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Question,
-            MessageBoxDefaultButton.Button1,
-            MessageBoxOptions.DefaultDesktopOnly);
+            MessageBoxDefaultButton.Button1);
 
             if (result == DialogResult.Yes)
                 Close();
@@ -111,6 +110,11 @@ namespace MineSweeper
         {
             Thread.Sleep(1);
             _label.Text = $"Количество флажков: {_field.FlagsCount}";
+        }
+
+        private void NewGame_Click(object sender, EventArgs e)
+        {
+            _field.NewGame();
         }
     }
 }
