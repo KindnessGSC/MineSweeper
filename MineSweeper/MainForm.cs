@@ -92,7 +92,19 @@ namespace MineSweeper
 
         private void Exit_Click(object sender, EventArgs e)
         {
-            Close();
+            DialogResult result = MessageBox.Show(
+           "Вы хотите выйти из приложения?",
+           "Сообщение",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question,
+            MessageBoxDefaultButton.Button1,
+            MessageBoxOptions.DefaultDesktopOnly);
+
+            if (result == DialogResult.Yes)
+                Close();
+            
+            this.TopMost = true;
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
