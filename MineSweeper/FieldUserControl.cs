@@ -120,7 +120,7 @@ namespace MineSweeper
             switch (_cellsCount)
             {
                 case 9:
-                    _bombsCount = 5;
+                    _bombsCount = 10;
                     break;
                 case 14:
                     _bombsCount = 40;
