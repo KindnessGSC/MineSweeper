@@ -267,19 +267,22 @@ namespace MineSweeper
 
             if(e.Button == MouseButtons.Right)
             {
-                if(_flagsCount > 0)
+                if (_flagsCount > 0 && cell.IsClickable)
                 {
-                    cell.IsClickable = !cell.IsClickable;
-
-                    if (!cell.IsClickable)
+                    if (cell.IsClickable)
                     {
                         cell.Text = "B";
                         _flagsCount--;
+                        cell.IsClickable = false;
                     }
-                    else
+                }
+                else
+                {
+                    if (!cell.IsClickable)
                     {
                         cell.Text = string.Empty;
                         _flagsCount++;
+                        cell.IsClickable = true;
                     }
                 }
             }
