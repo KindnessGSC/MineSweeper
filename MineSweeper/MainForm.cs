@@ -101,10 +101,11 @@ namespace MineSweeper
             MessageBoxOptions.DefaultDesktopOnly);
 
             if (result == DialogResult.Yes)
-                Close(); 
+                Close();
+            
+            this.TopMost = true;
 
-        
-    }
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
