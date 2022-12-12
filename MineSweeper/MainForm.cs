@@ -20,9 +20,6 @@ namespace MineSweeper
 
             StartPosition = FormStartPosition.CenterScreen;
 
-            const int heightOffset = 20;
-            const int widthOffset = 18;
-
             _field = new FieldUserControl(1, 35);
             _field.GenerateField();
 
@@ -42,6 +39,7 @@ namespace MineSweeper
             //открытие и сохранение настроек
             SettingForm form = new SettingForm();
             form.MusicPlay = muzicPlay;
+            form.difficult = field.FieldDifficultly;
             form.ShowDialog();
             //сохранение параметров 
             if(form.DialogResult == DialogResult.OK)
@@ -59,6 +57,7 @@ namespace MineSweeper
                         muzicPlayer.Stop();
                     }
                 }
+                field.FieldDifficultly = form.difficult;
 			}
 		}
 
