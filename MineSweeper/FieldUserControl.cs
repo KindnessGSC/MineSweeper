@@ -12,11 +12,13 @@ namespace MineSweeper
     {
         private int _fieldSize; // Размер поля
         private int _cellsCount; // Количество ячеек на поле
+
         private int _fieldDifficultlyIndex; // Индекс уровеня сложности поля
         private Dictionary<int, int> _fieldDifficulty; // Уровень сложности поля
 
         private int _cellSize; // Размер ячейки
         private Cell[,] _field; // Поле ячеек
+        private int _bombsCount;
 
         private bool _isStarted = false; // Состояние игры (Запущена)
         
@@ -32,6 +34,10 @@ namespace MineSweeper
         /// Возвращает уровень сложности.
         /// </summary>
         public int FieldDifficultly { get { return _fieldDifficultlyIndex; } }
+        /// <summary>
+        /// Возвращает кол-во бомб на поле
+        /// </summary>
+        public int BombsCount { get { return _bombsCount; } }
 
         /// <summary>
         /// Создает пустое поле для игры.
@@ -43,6 +49,7 @@ namespace MineSweeper
             _cellsCount = 0;
             _field = null;
             _cellSize = 0;
+            _bombsCount = 0;
             _fieldDifficultlyIndex = 0;
             _fieldDifficulty = null;
             Size = new Size(_fieldSize, _fieldSize);
@@ -69,12 +76,25 @@ namespace MineSweeper
                 _fieldDifficulty = new Dictionary<int, int>
                 {
                     { 1, 9 },
-                    { 2, 12 },
-                    { 3, 16 }
+                    { 2, 14 },
+                    { 3, 20 }
                 };
             }
 
             _fieldDifficulty.TryGetValue(_fieldDifficultlyIndex, out _cellsCount);
+
+            switch (_cellsCount)
+            {
+                case 9:
+                    _bombsCount = 10;
+                    break;
+                case 14:
+                    _bombsCount = 40;
+                    break;
+                case 20:
+                    _bombsCount = 100;
+                    break;
+            }
 
             SetFieldSize(_cellsCount, _cellSize);
             GenerateCells(_cellsCount, _cellSize);
@@ -92,12 +112,25 @@ namespace MineSweeper
                 _fieldDifficulty = new Dictionary<int, int>
                 {
                     { 1, 9 },
-                    { 2, 12 },
-                    { 3, 16 }
+                    { 2, 14 },
+                    { 3, 20 }
                 };
             }
 
             _fieldDifficulty.TryGetValue(_fieldDifficultlyIndex, out _cellsCount);
+
+            switch (_cellsCount)
+            {
+                case 9:
+                    _bombsCount = 10;
+                    break;
+                case 14:
+                    _bombsCount = 40;
+                    break;
+                case 20:
+                    _bombsCount = 100;
+                    break;
+            }
 
             SetFieldSize(_cellsCount, _cellSize);
             GenerateCells(_cellsCount, _cellSize);
@@ -138,59 +171,107 @@ namespace MineSweeper
                 }
             }
 
-            GenerateCells(_cellsCount, _cellSize);
+            GenerateField();
         }
 
-        private void OpenCell(Cell cell)
+        private void OpenRegion(Cell cell)
         {
-            for (int x = 0; x < _cellsCount; x++)
+            Queue<Cell> queue = new Queue<Cell>();
+            queue.Enqueue(cell);
+
+            while (queue.Count > 0)
             {
-                for (int y = 0; y < _cellsCount; y++)
+                Cell currentCell = queue.Dequeue();
+                OpenCell(currentCell.XCoord, currentCell.YCoord, currentCell);
+                if (CountBombsAround(currentCell.XCoord, currentCell.YCoord) == 0)
                 {
-                    if (_field[x, y] == cell)
+                    for (int y = currentCell.YCoord - 1; y <= currentCell.YCoord + 1; y++)
                     {
-                        cell.Text = CountBombsAround(x, y).ToString();
+                        for (int x = currentCell.XCoord - 1; x <= currentCell.XCoord + 1; x++)
+                        {
+                            if (x >= 0 && x < _cellsCount && y >= 0 && y < _cellsCount)
+                            {
+                                if (!_field[x, y].WasAdded)
+                                {
+                                    queue.Enqueue(_field[x, y]);
+                                    _field[x, y].WasAdded = true;
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
+
+        private void OpenCell(int xC, int yC, Cell cell)
+        {
+            int bombsAround = CountBombsAround(xC, yC);
+
+            if (bombsAround != 0)
+            {
+                cell.Text = bombsAround.ToString();
+            }
+
+            cell.Enabled = false;
+        }
+
 
         private int CountBombsAround(int xC, int yC)
         {
-            int bombsCount = 0;
+            int bombsAround = 0;
 
             for (int x = xC - 1; x <= xC + 1; x++)
             {
-                for (int y = yC - 1; y < yC + 1; y++)
+                for (int y = yC - 1; y <= yC + 1; y++)
                 {
                     if(x >= 0 && x < _cellsCount && y >= 0 && y < _cellsCount)
                     {
-                        if (_field[x, y].IsBomb) bombsCount++;
+                        if (_field[x, y].IsBomb) bombsAround++;
                     }
                 }
             }
 
-            return bombsCount;
+            return bombsAround;
         }
 
-        private void CellClick(object sender, EventArgs e)
+        private void CellClick(object sender, MouseEventArgs e)
         {
             Cell cell = sender as Cell;
 
             if (!_isStarted)
             {
                 _isStarted = true;
-                GenerateBombs(cell, bombsCount);
+                GenerateBombs(cell, _bombsCount);
             }
 
-            if (cell.IsBomb)
+            if(e.Button == MouseButtons.Left && cell.IsClickable)
             {
-                _isStarted = false;
-                Explode();
+                if (cell.IsBomb)
+                {
+                    _isStarted = false;
+                    Explode();
+                }
+                else
+                {
+                    OpenRegion(cell);
+                }
             }
-            else
+
+            if(e.Button == MouseButtons.Right)
             {
-                OpenCell(cell);
+                cell.IsClickable = !cell.IsClickable;
+
+                if (!cell.IsClickable)
+                {
+                    cell.Font = new Font("Arial", 16);
+                    cell.Text = "B";
+                    _bombsCount--;
+                }
+                else
+                {
+                    cell.Text = string.Empty;
+                    _bombsCount++;
+                }
             }
         }
 
@@ -207,8 +288,12 @@ namespace MineSweeper
 
                     cell.Size = new Size(_cellSize, _cellSize);
                     cell.Location = new Point(x, y);
+                    cell.XCoord = i;
+                    cell.YCoord = j;
+                    cell.IsClickable = true;
+                    cell.TabStop = false;
 
-                    cell.Click += CellClick;
+                    cell.MouseUp += CellClick;
                     _field[i, j] = cell;
                     Controls.Add(_field[i, j]);
                 }
@@ -229,6 +314,7 @@ namespace MineSweeper
                     if (_field[x, y] != cell && !_field[x, y].IsBomb)
                     {
                         _field[x, y].IsBomb = true;
+                        _field[x, y].Font = new Font("Arial", 24);
                         bombsCount--;
                     }
                 }

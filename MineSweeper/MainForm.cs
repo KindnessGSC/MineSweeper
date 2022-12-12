@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System.Media;
+using System.Threading;
 
 namespace MineSweeper
 {
@@ -9,14 +10,31 @@ namespace MineSweeper
     {
         SoundPlayer muzicPlayer = null;
         bool muzicPlay = true;
+
+        private FieldUserControl _field;
+        private Label _label;
+
         public MainForm()
         {
             InitializeComponent();
+
             StartPosition = FormStartPosition.CenterScreen;
 
-            FieldUserControl field = new FieldUserControl(1, 35);
-            field.GenerateField();
-            ConfigureFieldLocation(field);
+            const int heightOffset = 20;
+            const int widthOffset = 18;
+
+            _field = new FieldUserControl(1, 35);
+            _field.GenerateField();
+
+            _label = new Label();
+            _label.AutoSize = true;
+
+            _label.Location = new Point(_label.Location.X, _label.Location.Y + toolStrip1.Height);
+
+            _field.Location = new Point(_field.Location.X, _field.Location.Y + toolStrip1.Height + heightOffset);
+            Controls.Add(_field);
+            Controls.Add(_label);
+            Size = new Size(_field.FieldSize + widthOffset, _field.FieldSize + (toolStrip1.Height * 2) + heightOffset * 2);
         }
 
         private void SettingOpenClick(object sender, EventArgs e)
@@ -46,7 +64,8 @@ namespace MineSweeper
 
         private void Main_Load(object sender, EventArgs e)
 		{
-            string musicPath = "Music1.wav";
+            timer1.Start();
+            string musicPath = "Music12.wav";
             muzicPlayer = new SoundPlayer();
             
             try
@@ -70,6 +89,12 @@ namespace MineSweeper
         private void Exit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Thread.Sleep(1);
+            _label.Text = $"Количество флажков: {_field.BombsCount}";
         }
     }
 }
