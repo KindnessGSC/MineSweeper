@@ -17,7 +17,7 @@ namespace MineSweeper
 		private void SettingForm_Load(object sender, EventArgs e)
 		{
 			MuzicButtonChange();
-			DifficultComboBox.SelectedIndex = difficult;
+			DifficultComboBox.SelectedIndex = difficult - 1;
 		}
 
 		private void CancelButton_Click(object sender, EventArgs e)
@@ -29,7 +29,7 @@ namespace MineSweeper
 		private void OkClick(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
-			difficult = DifficultComboBox.SelectedIndex;
+			difficult = DifficultComboBox.SelectedIndex + 1;
 			this.Close();
 		}
 

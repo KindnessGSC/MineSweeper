@@ -66,6 +66,21 @@ namespace MineSweeper
             _cellSize = cellSize > 0 ? cellSize : _cellSize;
         }
 
+        public void ChangeDiffucltly(int difficultly)
+        {
+            _fieldDifficultlyIndex = difficultly;
+
+            for (int i = 0; i < _cellsCount; i++)
+            {
+                for (int j = 0; j < _cellsCount; j++)
+                {
+                    Controls.Remove(_field[i, j]);
+                }
+            }
+
+            GenerateField();
+        }
+
         /// <summary>
         /// Генерирует игровое поле.
         /// </summary>

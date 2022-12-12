@@ -14,6 +14,9 @@ namespace MineSweeper
         private FieldUserControl _field;
         private Label _label;
 
+        private const int heightOffset = 20;
+        private const int widthOffset = 18;
+
         public MainForm()
         {
             InitializeComponent();
@@ -39,7 +42,7 @@ namespace MineSweeper
             //открытие и сохранение настроек
             SettingForm form = new SettingForm();
             form.MusicPlay = muzicPlay;
-            form.difficult = field.FieldDifficultly;
+            form.difficult = _field.FieldDifficultly;
             form.ShowDialog();
             //сохранение параметров 
             if(form.DialogResult == DialogResult.OK)
@@ -57,8 +60,10 @@ namespace MineSweeper
                         muzicPlayer.Stop();
                     }
                 }
-                field.FieldDifficultly = form.difficult;
-			}
+
+                _field.ChangeDiffucltly(form.difficult);
+                Size = new Size(_field.FieldSize + widthOffset, _field.FieldSize + (toolStrip1.Height * 2) + heightOffset * 2);
+            }
 		}
 
         private void Main_Load(object sender, EventArgs e)
