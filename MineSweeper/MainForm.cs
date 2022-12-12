@@ -12,7 +12,7 @@ namespace MineSweeper
         bool muzicPlay = true;
 
         private FieldUserControl _field;
-        private Label _label;
+        private readonly Label _label;
 
         private const int heightOffset = 20;
         private const int widthOffset = 18;

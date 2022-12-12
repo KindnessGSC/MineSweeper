@@ -74,9 +74,16 @@ namespace MineSweeper
 
         public void ChangeDiffucltly(int difficultly)
         {
+            _fieldDifficultlyIndex = difficultly;
+
+            RestoreValues();
+            GenerateField();
+        }
+
+        private void RestoreValues()
+        {
             _isStarted = false;
             _cellsOpened = 0;
-            _fieldDifficultlyIndex = difficultly;
 
             for (int i = 0; i < _cellsCount; i++)
             {
@@ -85,22 +92,11 @@ namespace MineSweeper
                     Controls.Remove(_field[i, j]);
                 }
             }
-
-            GenerateField();
         }
 
         public void NewGame()
         {
-            _isStarted = false;
-            _cellsOpened = 0;
-            for (int i = 0; i < _cellsCount; i++)
-            {
-                for (int j = 0; j < _cellsCount; j++)
-                {
-                    Controls.Remove(_field[i, j]);
-                }
-            }
-
+            RestoreValues();
             GenerateField();
         }
 
@@ -159,7 +155,6 @@ namespace MineSweeper
                 {
                     if (_field[i, j].IsBomb)
                     {
-                        _field[i, j].Font = new Font("Arial", 24);
                         _field[i, j].Text = "*";
                     }
                 }
@@ -167,15 +162,7 @@ namespace MineSweeper
 
             MessageBox.Show("Вы проиграли! :(");
 
-            for (int i = 0; i < _cellsCount; i++)
-            {
-                for (int j = 0; j < _cellsCount; j++)
-                {
-                    Controls.Remove(_field[i, j]);
-                }
-            }
-
-            _cellsOpened = 0;
+            RestoreValues();
             GenerateField();
         }
 
@@ -280,18 +267,20 @@ namespace MineSweeper
 
             if(e.Button == MouseButtons.Right)
             {
-                cell.IsClickable = !cell.IsClickable;
+                if(_flagsCount > 0)
+                {
+                    cell.IsClickable = !cell.IsClickable;
 
-                if (!cell.IsClickable)
-                {
-                    cell.Font = new Font("Arial", 16);
-                    cell.Text = "B";
-                    _flagsCount--;
-                }
-                else
-                {
-                    cell.Text = string.Empty;
-                    _flagsCount++;
+                    if (!cell.IsClickable)
+                    {
+                        cell.Text = "B";
+                        _flagsCount--;
+                    }
+                    else
+                    {
+                        cell.Text = string.Empty;
+                        _flagsCount++;
+                    }
                 }
             }
             CheckWin();
@@ -336,7 +325,6 @@ namespace MineSweeper
                     if (_field[x, y] != cell && !_field[x, y].IsBomb)
                     {
                         _field[x, y].IsBomb = true;
-                        _field[x, y].Font = new Font("Arial", 24);
                         bombsCount--;
                     }
                 }
