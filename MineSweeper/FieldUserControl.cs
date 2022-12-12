@@ -19,8 +19,13 @@ namespace MineSweeper
         private int _cellSize; // Размер ячейки
         private Cell[,] _field; // Поле ячеек
         private int _bombsCount;
+        private int _flagsCount;
 
         private bool _isStarted = false; // Состояние игры (Запущена)
+        int _cellsOpened = 0; // Кол-во открытых ячеек поля
+
+        public delegate void WinHandler();
+        public event WinHandler Win;
         
         /// <summary>
         /// Возвращает общее количество ячеек.
@@ -38,6 +43,7 @@ namespace MineSweeper
         /// Возвращает кол-во бомб на поле
         /// </summary>
         public int BombsCount { get { return _bombsCount; } }
+        public int FlagsCount { get { return _flagsCount; } }
 
         /// <summary>
         /// Создает пустое поле для игры.
@@ -102,7 +108,7 @@ namespace MineSweeper
             switch (_cellsCount)
             {
                 case 9:
-                    _bombsCount = 10;
+                    _bombsCount = 5;
                     break;
                 case 14:
                     _bombsCount = 40;
@@ -112,41 +118,7 @@ namespace MineSweeper
                     break;
             }
 
-            SetFieldSize(_cellsCount, _cellSize);
-            GenerateCells(_cellsCount, _cellSize);
-        }
-
-        /// <summary>
-        /// Генерирует игровое поле размером, в зависимости от установленного уровня сложности.
-        /// </summary>
-        public void GenerateField(int fieldDifficultly)
-        {
-            _fieldDifficultlyIndex = fieldDifficultly > 0 && fieldDifficultly <= 3 ? fieldDifficultly : _fieldDifficultlyIndex;
-
-            if (_fieldDifficulty == null)
-            {
-                _fieldDifficulty = new Dictionary<int, int>
-                {
-                    { 1, 9 },
-                    { 2, 14 },
-                    { 3, 20 }
-                };
-            }
-
-            _fieldDifficulty.TryGetValue(_fieldDifficultlyIndex, out _cellsCount);
-
-            switch (_cellsCount)
-            {
-                case 9:
-                    _bombsCount = 10;
-                    break;
-                case 14:
-                    _bombsCount = 40;
-                    break;
-                case 20:
-                    _bombsCount = 100;
-                    break;
-            }
+            _flagsCount = _bombsCount;
 
             SetFieldSize(_cellsCount, _cellSize);
             GenerateCells(_cellsCount, _cellSize);
@@ -187,6 +159,7 @@ namespace MineSweeper
                 }
             }
 
+            _cellsOpened = 0;
             GenerateField();
         }
 
@@ -194,17 +167,21 @@ namespace MineSweeper
         {
             Queue<Cell> queue = new Queue<Cell>();
             queue.Enqueue(cell);
+            cell.WasAdded = true;
 
             while (queue.Count > 0)
             {
                 Cell currentCell = queue.Dequeue();
                 OpenCell(currentCell.XCoord, currentCell.YCoord, currentCell);
+                _cellsOpened++;
                 if (CountBombsAround(currentCell.XCoord, currentCell.YCoord) == 0)
                 {
                     for (int y = currentCell.YCoord - 1; y <= currentCell.YCoord + 1; y++)
                     {
                         for (int x = currentCell.XCoord - 1; x <= currentCell.XCoord + 1; x++)
                         {
+                            if (x == currentCell.XCoord && y == currentCell.YCoord) continue;
+
                             if (x >= 0 && x < _cellsCount && y >= 0 && y < _cellsCount)
                             {
                                 if (!_field[x, y].WasAdded)
@@ -231,6 +208,18 @@ namespace MineSweeper
             cell.Enabled = false;
         }
 
+        private void CheckWin()
+        {
+            int cells = _field.Length;
+            int emptycells = cells - _bombsCount;
+
+            if (_cellsOpened >= emptycells)
+            {
+                MessageBox.Show("Вы победили! :)");
+                _cellsOpened = 0;
+                Win?.Invoke();
+            }
+        }
 
         private int CountBombsAround(int xC, int yC)
         {
@@ -281,14 +270,15 @@ namespace MineSweeper
                 {
                     cell.Font = new Font("Arial", 16);
                     cell.Text = "B";
-                    _bombsCount--;
+                    _flagsCount--;
                 }
                 else
                 {
                     cell.Text = string.Empty;
-                    _bombsCount++;
+                    _flagsCount++;
                 }
             }
+            CheckWin();
         }
 
         private void GenerateCells(int cellsCount, int cellSize)

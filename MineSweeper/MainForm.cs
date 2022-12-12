@@ -98,7 +98,7 @@ namespace MineSweeper
         private void timer1_Tick(object sender, EventArgs e)
         {
             Thread.Sleep(1);
-            _label.Text = $"Количество флажков: {_field.BombsCount}";
+            _label.Text = $"Количество флажков: {_field.FlagsCount}";
         }
     }
 }
