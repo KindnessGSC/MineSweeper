@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System.Media;
-using System.Threading.Tasks;
 
 namespace MineSweeper
 {
@@ -59,26 +58,6 @@ namespace MineSweeper
             {
                 
             }
-        }
-
-        private void ConfigureFieldLocation(FieldUserControl field)
-        {
-            field.Anchor = AnchorStyles.None;
-
-            int posX = (int)((this.Width - field.Width) * 0.5) - 1;
-            int posY = (int)((this.Height - field.Height) * 0.5) + 1;
-
-            int errorPosX = (int)(posX * 0.25) + 1;
-            posX -= errorPosX;
-
-            field.Location = new Point(posX, posY);
-            Controls.Add(field);
-        }
-
-		private void MenuButton_Click(object sender, EventArgs e)
-		{
-           
-
         }
 
         private void Leaderboard_Click(object sender, EventArgs e)

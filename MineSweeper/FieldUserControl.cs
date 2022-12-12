@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -177,7 +176,6 @@ namespace MineSweeper
         private void CellClick(object sender, EventArgs e)
         {
             Cell cell = sender as Cell;
-            int bombsCount = (int)(FieldSize / CellsCount * 0.5 * _fieldDifficultlyIndex);
 
             if (!_isStarted)
             {
