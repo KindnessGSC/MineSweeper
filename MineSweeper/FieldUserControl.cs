@@ -75,8 +75,24 @@ namespace MineSweeper
         public void ChangeDiffucltly(int difficultly)
         {
             _isStarted = false;
+            _cellsOpened = 0;
             _fieldDifficultlyIndex = difficultly;
 
+            for (int i = 0; i < _cellsCount; i++)
+            {
+                for (int j = 0; j < _cellsCount; j++)
+                {
+                    Controls.Remove(_field[i, j]);
+                }
+            }
+
+            GenerateField();
+        }
+
+        public void NewGame()
+        {
+            _isStarted = false;
+            _cellsOpened = 0;
             for (int i = 0; i < _cellsCount; i++)
             {
                 for (int j = 0; j < _cellsCount; j++)
@@ -91,7 +107,7 @@ namespace MineSweeper
         /// <summary>
         /// Генерирует игровое поле.
         /// </summary>
-        public void GenerateField()
+        private void GenerateField()
         {
             if (_fieldDifficulty == null)
             {

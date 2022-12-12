@@ -24,7 +24,7 @@ namespace MineSweeper
             StartPosition = FormStartPosition.CenterScreen;
 
             _field = new FieldUserControl(1, 35);
-            _field.GenerateField();
+            _field.NewGame();
 
             _label = new Label();
             _label.AutoSize = true;
