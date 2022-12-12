@@ -68,6 +68,7 @@ namespace MineSweeper
 
         public void ChangeDiffucltly(int difficultly)
         {
+            _isStarted = false;
             _fieldDifficultlyIndex = difficultly;
 
             for (int i = 0; i < _cellsCount; i++)
