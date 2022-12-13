@@ -97,15 +97,5 @@ namespace MineSweeper
             g.DrawImage(Properties.Resources.SpriteAtlas, imageRect, 0 + 33 * spritePos.X, 0 + 32 * spritePos.Y, 33, 33, GraphicsUnit.Pixel);
             this.Image = image;
         }
-
-        /*public void SpriteChange(int x, int y)
-        {
-            Image image = new Bitmap(Width, Height);
-            Graphics g = Graphics.FromImage(image);
-            Rectangle imageRect = new Rectangle(new Point(0, 0), new Size(Width, Height));
-
-            g.DrawImage(Properties.Resources.SpriteAtlas, imageRect, 0 + 33 * x, 0 + 32 * y, 33, 33, GraphicsUnit.Pixel);
-            this.Image = image;
-        }*/
     }
 }
