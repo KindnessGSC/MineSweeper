@@ -9,7 +9,7 @@ namespace MineSweeper
     public partial class MainForm : Form
     {
         SoundPlayer muzicPlayer = null;
-        bool muzicPlay = true;
+        bool muzicPlay = false;
 
         private FieldUserControl _field;
         private readonly Label _label;
