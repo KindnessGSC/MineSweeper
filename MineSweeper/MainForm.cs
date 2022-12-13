@@ -9,7 +9,7 @@ namespace MineSweeper
     public partial class MainForm : Form
     {
         SoundPlayer muzicPlayer = null;
-        bool muzicPlay = true;
+        bool muzicPlay = false;
 
         private FieldUserControl _field;
         private readonly Label _label;
@@ -69,7 +69,7 @@ namespace MineSweeper
         private void Main_Load(object sender, EventArgs e)
 		{
             timer1.Start();
-            string musicPath = "Music12.wav";
+            string musicPath = "Music1.wav";
             muzicPlayer = new SoundPlayer();
             
             try
