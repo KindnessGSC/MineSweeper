@@ -8,8 +8,11 @@ namespace MineSweeper
 {
     public partial class MainForm : Form
     {
+        //имя игрока
+        public string PlayerName;
+
         SoundPlayer muzicPlayer = null;
-        bool muzicPlay = false;
+        bool muzicPlay = true;
 
         private FieldUserControl _field;
         private readonly Label _label;
@@ -35,11 +38,12 @@ namespace MineSweeper
             Controls.Add(_field);
             Controls.Add(_label);
             Size = new Size(_field.FieldSize + widthOffset, _field.FieldSize + (toolStrip1.Height * 2) + heightOffset * 2);
+            _field.Win += OnWin();
         }
 
         private void SettingOpenClick(object sender, EventArgs e)
 		{
-            //открытие и сохранение настроек
+            //открытие настроек
             SettingForm form = new SettingForm();
             form.MusicPlay = muzicPlay;
             form.difficult = _field.FieldDifficultly;
@@ -60,9 +64,12 @@ namespace MineSweeper
                         muzicPlayer.Stop();
                     }
                 }
-
-                _field.ChangeDiffucltly(form.difficult);
-                Size = new Size(_field.FieldSize + widthOffset, _field.FieldSize + (toolStrip1.Height * 2) + heightOffset * 2);
+                //cложность
+                if (_field.FieldDifficultly != form.difficult)
+                {
+                    _field.ChangeDiffucltly(form.difficult);
+                    Size = new Size(_field.FieldSize + widthOffset, _field.FieldSize + (toolStrip1.Height * 2) + heightOffset * 2);
+                }
             }
 		}
 
@@ -116,5 +123,17 @@ namespace MineSweeper
         {
             _field.NewGame();
         }
+        //обработчик победы
+        public FieldUserControl.WinHandler OnWin()
+		{
+            inputName form = new inputName();
+            form.ShowDialog();
+            if(form.DialogResult == DialogResult.OK)
+			{
+                PlayerName = form.NameTextBox.Text;
+			}
+
+            return null;
+		}
     }
 }
