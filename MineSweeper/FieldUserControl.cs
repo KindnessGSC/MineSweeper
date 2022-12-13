@@ -155,7 +155,7 @@ namespace MineSweeper
                 {
                     if (_field[i, j].IsBomb)
                     {
-                        _field[i, j].Text = "*";
+                        _field[i, j].CurrentSpriteIndex = 10;
                     }
                 }
             }
@@ -176,7 +176,6 @@ namespace MineSweeper
             {
                 Cell currentCell = queue.Dequeue();
                 OpenCell(currentCell.XCoord, currentCell.YCoord, currentCell);
-                _cellsOpened++;
                 if (CountBombsAround(currentCell.XCoord, currentCell.YCoord) == 0)
                 {
                     for (int y = currentCell.YCoord - 1; y <= currentCell.YCoord + 1; y++)
@@ -201,14 +200,21 @@ namespace MineSweeper
 
         private void OpenCell(int xC, int yC, Cell cell)
         {
+            if (cell.IsOpened) return;
+
             int bombsAround = CountBombsAround(xC, yC);
 
             if (bombsAround != 0)
             {
-                cell.Text = bombsAround.ToString();
+                cell.CurrentSpriteIndex = bombsAround;
+            }
+            else
+            {
+                cell.CurrentSpriteIndex = 12;
             }
 
-            cell.Enabled = false;
+            _cellsOpened++;
+            cell.IsOpened = true;
         }
 
         private void CheckWin()
@@ -267,11 +273,11 @@ namespace MineSweeper
 
             if(e.Button == MouseButtons.Right)
             {
-                if (_flagsCount > 0 && cell.IsClickable)
+                if (_flagsCount > 0 && cell.IsClickable && CountBombsAround(cell.XCoord,cell.YCoord) > 0)
                 {
-                    if (cell.IsClickable)
+                    if (cell.IsClickable && cell.CurrentSpriteIndex < 1 && cell.CurrentSpriteIndex < 9)
                     {
-                        cell.Text = "B";
+                        cell.CurrentSpriteIndex = 9;
                         _flagsCount--;
                         cell.IsClickable = false;
                     }
@@ -280,7 +286,7 @@ namespace MineSweeper
                 {
                     if (!cell.IsClickable)
                     {
-                        cell.Text = string.Empty;
+                        cell.CurrentSpriteIndex = 0;
                         _flagsCount++;
                         cell.IsClickable = true;
                     }
@@ -305,6 +311,7 @@ namespace MineSweeper
                     cell.XCoord = i;
                     cell.YCoord = j;
                     cell.IsClickable = true;
+                    cell.CurrentSpriteIndex = 0;
                     cell.TabStop = false;
 
                     cell.MouseUp += CellClick;

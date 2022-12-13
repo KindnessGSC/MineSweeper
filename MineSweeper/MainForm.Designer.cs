@@ -50,7 +50,7 @@
             this.toolStripSettingButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(329, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(439, 27);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -64,27 +64,27 @@
             this.MenuButton.Image = ((System.Drawing.Image)(resources.GetObject("MenuButton.Image")));
             this.MenuButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MenuButton.Name = "MenuButton";
-            this.MenuButton.Size = new System.Drawing.Size(33, 24);
+            this.MenuButton.Size = new System.Drawing.Size(34, 24);
             this.MenuButton.Text = "MenuButton";
             // 
             // новаяИграToolStripMenuItem
             // 
             this.новаяИграToolStripMenuItem.Name = "новаяИграToolStripMenuItem";
-            this.новаяИграToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.новаяИграToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
             this.новаяИграToolStripMenuItem.Text = "Новая игра";
             this.новаяИграToolStripMenuItem.Click += new System.EventHandler(this.NewGame_Click);
             // 
             // Leaderboard
             // 
             this.Leaderboard.Name = "Leaderboard";
-            this.Leaderboard.Size = new System.Drawing.Size(192, 22);
+            this.Leaderboard.Size = new System.Drawing.Size(242, 26);
             this.Leaderboard.Text = "Рейтинг победителей";
             this.Leaderboard.Click += new System.EventHandler(this.Leaderboard_Click);
             // 
             // Exit
             // 
             this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(192, 22);
+            this.Exit.Size = new System.Drawing.Size(242, 26);
             this.Exit.Text = "Выход";
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
@@ -99,7 +99,7 @@
             this.toolStripSettingButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSettingButton.Image")));
             this.toolStripSettingButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSettingButton.Name = "toolStripSettingButton";
-            this.toolStripSettingButton.Size = new System.Drawing.Size(24, 24);
+            this.toolStripSettingButton.Size = new System.Drawing.Size(29, 24);
             this.toolStripSettingButton.Text = "Настройки";
             this.toolStripSettingButton.Click += new System.EventHandler(this.SettingOpenClick);
             // 
@@ -109,13 +109,13 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 400);
+            this.ClientSize = new System.Drawing.Size(439, 492);
             this.Controls.Add(this.toolStrip1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Сапёр";
