@@ -94,7 +94,7 @@ namespace MineSweeper
         private void Leaderboard_Click(object sender, EventArgs e)
         {
             //открытие таблицы лидеров
-            CSFormLeaderboards form = new CSFormLeaderboards();
+            Leaderboard form = new Leaderboard();
             form.ShowDialog();
         }
 

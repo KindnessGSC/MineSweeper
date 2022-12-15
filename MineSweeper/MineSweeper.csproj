@@ -56,18 +56,17 @@
     <Compile Include="Cell.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CSFormLeaderboards.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CSFormLeaderboards.Designer.cs">
-      <DependentUpon>CSFormLeaderboards.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CSteamLeaderboards.cs" />
     <Compile Include="inputName.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="inputName.Designer.cs">
       <DependentUpon>inputName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Leaderboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Leaderboard.designer.cs">
+      <DependentUpon>Leaderboard.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -90,11 +89,11 @@
     <Compile Include="SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CSFormLeaderboards.resx">
-      <DependentUpon>CSFormLeaderboards.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="inputName.resx">
       <DependentUpon>inputName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Leaderboard.resx">
+      <DependentUpon>Leaderboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -115,6 +114,7 @@
     <EmbeddedResource Include="SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\Player.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

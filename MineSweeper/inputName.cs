@@ -41,6 +41,13 @@ namespace MineSweeper
 			else{
 				name = NameTextBox.Text;
 				DialogResult = DialogResult.OK;
+				Player player = new Player();
+				player.Difficult = 1;
+				player.Name = name;
+				player.Time = 30;
+				Leaderboard leaderboard = new Leaderboard();
+				leaderboard.playersTable.BindingContext = ;
+				Leaderboard.SaveData("save.dat", player);
 				Close();
 			}
 		}

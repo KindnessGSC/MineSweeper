@@ -335,6 +335,7 @@ namespace MineSweeper
                     if (_field[x, y] != cell && !_field[x, y].IsBomb)
                     {
                         _field[x, y].IsBomb = true;
+                        _field[x,y].CurrentSpriteIndex = 10;
                         bombsCount--;
                     }
                 }
