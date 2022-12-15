@@ -33,6 +33,11 @@ namespace MineSweeper
 			{
 				MessageBox.Show("введите ник!");
 			}
+			else if (NameTextBox.Text.Length > 16)
+			{
+				MessageBox.Show("Слишком длинный ник! " +
+					"(должен быть не более 16 символов)");
+			}
 			else{
 				name = NameTextBox.Text;
 				DialogResult = DialogResult.OK;
