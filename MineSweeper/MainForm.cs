@@ -100,7 +100,7 @@ namespace MineSweeper
         private void Exit_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
-           "Вы хотите выйти в главное меню?",
+           "Вы хотите выйти из приложения?",
            "Сообщение",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Question,
@@ -109,8 +109,7 @@ namespace MineSweeper
             if (result == DialogResult.Yes)  
 
            Close();
-            Menu form = new Menu();
-            form.ShowDialog();
+            
 
             this.TopMost = true;
 

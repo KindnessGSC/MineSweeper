@@ -70,22 +70,22 @@
             // новаяИграToolStripMenuItem
             // 
             this.новаяИграToolStripMenuItem.Name = "новаяИграToolStripMenuItem";
-            this.новаяИграToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.новаяИграToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.новаяИграToolStripMenuItem.Text = "Новая игра";
             this.новаяИграToolStripMenuItem.Click += new System.EventHandler(this.NewGame_Click);
             // 
             // Leaderboard
             // 
             this.Leaderboard.Name = "Leaderboard";
-            this.Leaderboard.Size = new System.Drawing.Size(200, 22);
+            this.Leaderboard.Size = new System.Drawing.Size(197, 22);
             this.Leaderboard.Text = "Рейтинг победителей";
             this.Leaderboard.Click += new System.EventHandler(this.Leaderboard_Click);
             // 
             // Exit
             // 
             this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(200, 22);
-            this.Exit.Text = "Выход в главное меню";
+            this.Exit.Size = new System.Drawing.Size(197, 22);
+            this.Exit.Text = "Выход из приложения";
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // toolStripSeparator1
@@ -115,7 +115,7 @@
             this.Controls.Add(this.toolStrip1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Сапёр";
