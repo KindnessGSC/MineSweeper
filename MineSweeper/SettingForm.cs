@@ -13,7 +13,7 @@ namespace MineSweeper
 		public SettingForm()
 		{
 			InitializeComponent();
-			
+
 		}
 
 		private void SettingForm_Load(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace MineSweeper
 			try
 			{
 				writer = new StreamWriter(fileName, false, Encoding.Default);
-				if(MusicPlay)
+				if (MusicPlay)
 					writer.WriteLine($"{DifficultComboBox.SelectedIndex + 1};{1}");
 				else
 					writer.WriteLine($"{DifficultComboBox.SelectedIndex + 1};{0}");
@@ -92,7 +92,44 @@ namespace MineSweeper
 
 		private void LoadButton_Click(object sender, EventArgs e)
 		{
+			OpenFileDialog openFile = new OpenFileDialog
+			{
+				Filter = "Текстовые файлы *.txt|*.txt|Все файлы|*.*",
+				FilterIndex = 1
+			};
+			if (openFile.ShowDialog() == DialogResult.OK)
+			{
+				StreamReader reader = null;
+				bool open_file = false;
+				string fileName = openFile.FileName;
 
+				if (string.IsNullOrEmpty(fileName) || string.IsNullOrWhiteSpace(fileName))
+					return;
+				try
+				{
+					string str;
+					reader = new StreamReader(fileName, Encoding.Default);
+					str = reader.ReadLine();
+					string[] x = str.Split(';');
+					DifficultComboBox.SelectedIndex = int.Parse(x[0])-1;
+					if (int.Parse(x[1]) == 0)
+						MusicPlay = false;
+					else
+						MusicPlay = true;
+					MuzicButtonChange();
+
+					reader.Close();
+				}
+				catch (Exception)
+				{
+					MessageBox.Show("Ошибка при чтении файла!", "Ошибка");
+				}
+				finally
+				{
+					if (reader != null)
+						reader.Dispose();
+				}
+			}
 		}
 	}
 }
