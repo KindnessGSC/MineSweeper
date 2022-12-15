@@ -8,8 +8,8 @@ namespace MineSweeper
 {
     public partial class MainForm : Form
     {
-        //имя игрока
-        public string PlayerName;
+        //игрок
+        Player player = new Player();
 
         SoundPlayer muzicPlayer = null;
         bool muzicPlay = true;
@@ -78,7 +78,8 @@ namespace MineSweeper
             timer1.Start();
             string musicPath = "Music1.wav";
             muzicPlayer = new SoundPlayer();
-            
+
+
             try
             {
                 muzicPlayer.SoundLocation = musicPath;
@@ -131,10 +132,7 @@ namespace MineSweeper
 		{
             inputName form = new inputName();
             form.ShowDialog();
-            if(form.DialogResult == DialogResult.OK)
-			{
-                PlayerName = form.NameTextBox.Text;
-			}
+            player.Name = form.NameTextBox.Text;
 
             return null;
 		}

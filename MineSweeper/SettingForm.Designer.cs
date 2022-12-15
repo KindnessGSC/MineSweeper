@@ -37,6 +37,8 @@ namespace MineSweeper
 			this.label2 = new System.Windows.Forms.Label();
 			this.DifficultComboBox = new System.Windows.Forms.ComboBox();
 			this.MuzicButton = new System.Windows.Forms.Button();
+			this.LoadButton = new System.Windows.Forms.Button();
+			this.SaveButton = new System.Windows.Forms.Button();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
@@ -46,16 +48,16 @@ namespace MineSweeper
 			this.flowLayoutPanel1.Controls.Add(this.cancelButton);
 			this.flowLayoutPanel1.Controls.Add(this.OkButton);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 157);
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 127);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(307, 32);
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(361, 32);
 			this.flowLayoutPanel1.TabIndex = 0;
 			// 
-			// CancelButton
+			// cancelButton
 			// 
-			this.cancelButton.Location = new System.Drawing.Point(229, 3);
-			this.cancelButton.Name = "CancelButton";
+			this.cancelButton.Location = new System.Drawing.Point(283, 3);
+			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.Size = new System.Drawing.Size(75, 23);
 			this.cancelButton.TabIndex = 0;
 			this.cancelButton.Text = "Отмена";
@@ -64,7 +66,7 @@ namespace MineSweeper
 			// 
 			// OkButton
 			// 
-			this.OkButton.Location = new System.Drawing.Point(148, 3);
+			this.OkButton.Location = new System.Drawing.Point(202, 3);
 			this.OkButton.Name = "OkButton";
 			this.OkButton.Size = new System.Drawing.Size(75, 23);
 			this.OkButton.TabIndex = 1;
@@ -87,7 +89,7 @@ namespace MineSweeper
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 138);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 76);
 			this.tableLayoutPanel1.TabIndex = 1;
 			this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
 			// 
@@ -134,13 +136,35 @@ namespace MineSweeper
 			this.MuzicButton.UseVisualStyleBackColor = true;
 			this.MuzicButton.Click += new System.EventHandler(this.MuzicButton_Click);
 			// 
+			// LoadButton
+			// 
+			this.LoadButton.Location = new System.Drawing.Point(247, 37);
+			this.LoadButton.Name = "LoadButton";
+			this.LoadButton.Size = new System.Drawing.Size(106, 23);
+			this.LoadButton.TabIndex = 4;
+			this.LoadButton.Text = "Загрузить";
+			this.LoadButton.UseVisualStyleBackColor = true;
+			this.LoadButton.Click += new System.EventHandler(this.button1_Click);
+			// 
+			// SaveButton
+			// 
+			this.SaveButton.Location = new System.Drawing.Point(247, 9);
+			this.SaveButton.Name = "SaveButton";
+			this.SaveButton.Size = new System.Drawing.Size(106, 23);
+			this.SaveButton.TabIndex = 2;
+			this.SaveButton.Text = "Сохранить как...";
+			this.SaveButton.UseVisualStyleBackColor = true;
+			this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+			// 
 			// SettingForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(307, 189);
+			this.ClientSize = new System.Drawing.Size(361, 159);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.flowLayoutPanel1);
+			this.Controls.Add(this.LoadButton);
+			this.Controls.Add(this.SaveButton);
 			this.Name = "SettingForm";
 			this.Text = "Настройки";
 			this.Load += new System.EventHandler(this.SettingForm_Load);
@@ -161,5 +185,7 @@ namespace MineSweeper
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ComboBox DifficultComboBox;
 		private System.Windows.Forms.Button MuzicButton;
+		private System.Windows.Forms.Button LoadButton;
+		private System.Windows.Forms.Button SaveButton;
 	}
 }

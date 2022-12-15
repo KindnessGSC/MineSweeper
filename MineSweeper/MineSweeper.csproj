@@ -81,6 +81,7 @@
     <Compile Include="FieldUserControl.Designer.cs">
       <DependentUpon>FieldUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingForm.cs">

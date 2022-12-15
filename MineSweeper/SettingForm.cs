@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace MineSweeper
@@ -50,6 +51,16 @@ namespace MineSweeper
 				MuzicButton.Text = "Вкл";
 			else
 				MuzicButton.Text = "Выкл";
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void SaveButton_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
