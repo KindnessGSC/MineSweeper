@@ -38,7 +38,7 @@ namespace MineSweeper
             Controls.Add(_field);
             Controls.Add(_label);
             Size = new Size(_field.FieldSize + widthOffset, _field.FieldSize + (toolStrip1.Height * 2) + heightOffset * 2);
-            _field.Win += OnWin();
+            _field.Win += OnWin;
         }
 
         private void SettingOpenClick(object sender, EventArgs e)
@@ -128,13 +128,11 @@ namespace MineSweeper
             _field.NewGame();
         }
         //обработчик победы
-        public FieldUserControl.WinHandler OnWin()
+        public void OnWin()
 		{
             inputName form = new inputName();
             form.ShowDialog();
             player.Name = form.NameTextBox.Text;
-
-            return null;
 		}
     }
 }
