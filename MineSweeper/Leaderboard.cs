@@ -22,7 +22,11 @@ namespace MineSweeper
 
         private void Leaderboard_Load(object sender, EventArgs e)
         {
-            if(inputName.Players.Count > 0)
+            dataGridView1.Columns[0].HeaderText = "Легко";
+            dataGridView1.Columns[1].HeaderText = "Нормально";
+            dataGridView1.Columns[2].HeaderText = "Сложно";
+
+            if (inputName.Players.Count > 0)
                 LoadToDataGrid(inputName.Players.ToArray());
         }
 
@@ -34,12 +38,6 @@ namespace MineSweeper
             _players = players != null ? players.ToList() : _players;
             temp = _players.Where(x => x.Difficult == 1).ToArray();
             dataGridView1.DataSource = temp;
-            if(temp.Length > 0)
-            {
-                dataGridView1.Columns[0].HeaderText = "Легко";
-                dataGridView1.Columns[1].HeaderText = "Нормально";
-                dataGridView1.Columns[2].HeaderText = "Сложно";
-            }
             dataGridView1.ColumnHeaderMouseClick += PlayersTable_ColumnHeaderMouseClick;
         }
 
@@ -82,7 +80,7 @@ namespace MineSweeper
             return players.ToArray();
         }
 
-        public static void SaveData(string fileName, Player[] player) 
+        public static void SaveData(string fileName, Player[] players) 
         {
             XmlSerializer xmlSerializer = new XmlSerializer(type: typeof(Player[]));
             
@@ -90,7 +88,7 @@ namespace MineSweeper
             {
                 try
                 {
-                    xmlSerializer.Serialize(writer, player); // то что нужно добавить в файл
+                    xmlSerializer.Serialize(writer, players); // то что нужно добавить в файл
                 }
                 catch
                 {

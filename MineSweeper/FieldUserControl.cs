@@ -24,8 +24,9 @@ namespace MineSweeper
         private bool _isStarted = false; // Состояние игры (Запущена)
         int _cellsOpened = 0; // Кол-во открытых ячеек поля
 
-        public delegate void WinHandler();
-        public event WinHandler Win;
+        public delegate void EventHandler();
+        public event EventHandler Win;
+        public event EventHandler Lose;
         
         /// <summary>
         /// Возвращает общее количество ячеек.
@@ -44,6 +45,7 @@ namespace MineSweeper
         /// </summary>
         public int BombsCount { get { return _bombsCount; } }
         public int FlagsCount { get { return _flagsCount; } }
+        public bool IsStarted { get { return _isStarted; } }
 
         /// <summary>
         /// Создает пустое поле для игры.
@@ -161,6 +163,9 @@ namespace MineSweeper
             }
 
             MessageBox.Show("Вы проиграли! :(");
+            
+            _isStarted = false;
+            Lose?.Invoke();
 
             RestoreValues();
             GenerateField();
@@ -224,8 +229,8 @@ namespace MineSweeper
 
             if (_cellsOpened >= emptycells)
             {
-                MessageBox.Show("Вы победили! :)");
                 _cellsOpened = 0;
+                _isStarted = false;
                 Win?.Invoke();
             }
         }
@@ -273,9 +278,9 @@ namespace MineSweeper
 
             if(e.Button == MouseButtons.Right)
             {
-                if (_flagsCount > 0 && cell.IsClickable && CountBombsAround(cell.XCoord,cell.YCoord) > 0)
+                if (_flagsCount > 0 && cell.IsClickable && CountBombsAround(cell.XCoord,cell.YCoord) > 0 || _flagsCount > 0 && cell.CurrentSpriteIndex == 0)
                 {
-                    if (cell.IsClickable && cell.CurrentSpriteIndex < 1 && cell.CurrentSpriteIndex < 9)
+                    if (cell.IsClickable && cell.CurrentSpriteIndex < 1 && cell.CurrentSpriteIndex < 9 || cell.CurrentSpriteIndex == 0)
                     {
                         cell.CurrentSpriteIndex = 9;
                         _flagsCount--;
@@ -335,7 +340,6 @@ namespace MineSweeper
                     if (_field[x, y] != cell && !_field[x, y].IsBomb)
                     {
                         _field[x, y].IsBomb = true;
-                        _field[x,y].CurrentSpriteIndex = 10;
                         bombsCount--;
                     }
                 }

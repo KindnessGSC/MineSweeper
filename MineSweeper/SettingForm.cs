@@ -66,7 +66,7 @@ namespace MineSweeper
 			if (saveFile.ShowDialog() == DialogResult.OK)
 				fileName = saveFile.FileName;
 
-			if(inputName.Players.Count > 0)
+			if(inputName.Players.Count > 0 && !string.IsNullOrEmpty(fileName))
             {
 				Leaderboard.SaveData(fileName, inputName.Players.ToArray());
 			}
@@ -76,7 +76,7 @@ namespace MineSweeper
 		{
 			OpenFileDialog openFile = new OpenFileDialog
 			{
-				Filter = "Текстовые файлы *.txt|*.txt|Все файлы|*.*",
+				Filter = "Файлы сохранений *.dat|*.dat|Все файлы|*.*",
 				FilterIndex = 1
 			};
 			if (openFile.ShowDialog() == DialogResult.OK)
@@ -85,7 +85,8 @@ namespace MineSweeper
 
 				if (string.IsNullOrEmpty(fileName) || string.IsNullOrWhiteSpace(fileName))
 					return;
-				if(inputName.Players.Count > 0)
+
+				if(inputName.Players.Count >= 0)
                 {
 					inputName.Players = Leaderboard.LoadData(fileName).ToList();
                 }
