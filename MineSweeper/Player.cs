@@ -8,19 +8,23 @@ namespace MineSweeper
 {
 	public class Player
 	{
-		public string Name;
-		public int Time;
-		public int Difficult;
+		private string name;
+		private int time;
+		private int difficulty;
+
+		public string Name { get { return name; } set { name = value; } }
+		public int Time { get { return time; } set { time = value; }  }
+		public int Difficult {  get { return difficulty; } set { difficulty = value; } }
 
 		public Player()
 		{
 			Name = "NN";
 		}
-		public Player(string name, int time, int difficult)
+		public Player(string name, int time, int difficulty)
 		{
 			Name = name;
 			Time = time;
-			Difficult = difficult;
+			Difficult = difficulty;
 		}
 	}
 }

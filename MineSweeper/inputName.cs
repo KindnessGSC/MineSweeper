@@ -18,6 +18,18 @@ namespace MineSweeper
 			InitializeComponent();
 		}
 
+		static List<Player> _players;
+
+		public static List<Player> Players 
+		{ 
+			get 
+			{ 
+				if( _players == null ) _players = new List<Player>();
+				return _players;
+			} 
+			set { _players = value; }
+		}
+
 		private void textBox1_TextChanged(object sender, EventArgs e)
 		{
 
@@ -25,6 +37,8 @@ namespace MineSweeper
 
 		private void OkButton_Click(object sender, EventArgs e)
 		{
+			if(_players == null) _players = new List<Player>();
+
 			if(NameTextBox.Text == null)
 			{
 				MessageBox.Show("введите ник!");
@@ -38,16 +52,15 @@ namespace MineSweeper
 				MessageBox.Show("Слишком длинный ник! " +
 					"(должен быть не более 16 символов)");
 			}
-			else{
+			else
+			{
 				name = NameTextBox.Text;
 				DialogResult = DialogResult.OK;
 				Player player = new Player();
 				player.Difficult = 1;
 				player.Name = name;
 				player.Time = 30;
-				Leaderboard leaderboard = new Leaderboard();
-				leaderboard.playersTable.BindingContext = ;
-				Leaderboard.SaveData("save.dat", player);
+				_players.Add(player);				
 				Close();
 			}
 		}

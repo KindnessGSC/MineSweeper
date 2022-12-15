@@ -17,36 +17,85 @@ namespace MineSweeper
         public Leaderboard()
         {
             InitializeComponent();
+            this.Load += Leaderboard_Load;
         }
 
-        public DataGridView GridView 
-        { 
-            get { return playersTable; } 
-            set { playersTable = value; }
-        }
-
-
-        public static Player LoadData(string fileName) 
+        private void Leaderboard_Load(object sender, EventArgs e)
         {
-            Player player = new Player();
-            XmlSerializer xmlSerializer = new XmlSerializer(type: typeof(Player));
+            if(inputName.Players.Count > 0)
+                LoadToDataGrid(inputName.Players.ToArray());
+        }
+
+        List<Player> _players;
+        Player[] temp;
+
+        private void LoadToDataGrid(Player[] players) 
+        {
+            _players = players != null ? players.ToList() : _players;
+            temp = _players.Where(x => x.Difficult == 1).ToArray();
+            dataGridView1.DataSource = temp;
+            if(temp.Length > 0)
+            {
+                dataGridView1.Columns[0].HeaderText = "Легко";
+                dataGridView1.Columns[1].HeaderText = "Нормально";
+                dataGridView1.Columns[2].HeaderText = "Сложно";
+            }
+            dataGridView1.ColumnHeaderMouseClick += PlayersTable_ColumnHeaderMouseClick;
+        }
+
+        private void PlayersTable_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            temp = _players.ToArray();
+            if (e.ColumnIndex == 0) 
+            {
+                temp = _players.Where(x => x.Difficult ==1).ToArray();
+            }
+            if (e.ColumnIndex == 1)
+            {
+                temp = _players.Where(x => x.Difficult == 2).ToArray();
+            }
+            if (e.ColumnIndex == 2)
+            {
+                temp = _players.Where(x => x.Difficult == 3).ToArray();
+            }
+            
+            dataGridView1.DataSource = temp;
+        }
+
+        public static Player[] LoadData(string fileName) 
+        {
+            List<Player> players = new List<Player>();
+            XmlSerializer xmlSerializer = new XmlSerializer(type: typeof(Player[]));
 
             using (FileStream reader = new FileStream(fileName, FileMode.OpenOrCreate)) 
             {
-                player = (Player) xmlSerializer.Deserialize(reader);
-
+                try
+                {
+                    players = ((Player[])xmlSerializer.Deserialize(reader)).ToList();
+                }
+                catch
+                {
+                    
+                }
             }
-            return player;
+
+            return players.ToArray();
         }
 
-        public static void SaveData(string fileName, Player player) 
+        public static void SaveData(string fileName, Player[] player) 
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(type: typeof(Player));
+            XmlSerializer xmlSerializer = new XmlSerializer(type: typeof(Player[]));
             
             using (FileStream writer = new FileStream(fileName, FileMode.OpenOrCreate)) // указать имя переменной в которой лежит имя и путь файла
             {
-                xmlSerializer.Serialize(writer,player); // то что нужно добавить в файл
+                try
+                {
+                    xmlSerializer.Serialize(writer, player); // то что нужно добавить в файл
+                }
+                catch
+                {
 
+                }
             }
         }
     }

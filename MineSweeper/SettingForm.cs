@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -59,34 +60,15 @@ namespace MineSweeper
 			string fileName = null;
 			SaveFileDialog saveFile = new SaveFileDialog
 			{
-				Filter = "Текстовые файлы *.txt|*.txt|Все файлы|*.*",
+				Filter = "Файлы сохранений *.dat|*.dat|Все файлы|*.*",
 				FilterIndex = 1
 			};
 			if (saveFile.ShowDialog() == DialogResult.OK)
 				fileName = saveFile.FileName;
-			StreamWriter writer = null;
-			bool save_file = false;
-			if (string.IsNullOrEmpty(fileName) || string.IsNullOrWhiteSpace(fileName))
-				return;
-			try
-			{
-				writer = new StreamWriter(fileName, false, Encoding.Default);
-				if (MusicPlay)
-					writer.WriteLine($"{DifficultComboBox.SelectedIndex + 1};{1}");
-				else
-					writer.WriteLine($"{DifficultComboBox.SelectedIndex + 1};{0}");
 
-				writer.Close();
-				save_file = true;
-			}
-			catch (Exception)
-			{
-				MessageBox.Show("Ошибка при сохранение файла!", "Ошибка");
-			}
-			finally
-			{
-				if (writer != null)
-					writer.Dispose();
+			if(inputName.Players.Count > 0)
+            {
+				Leaderboard.SaveData(fileName, inputName.Players.ToArray());
 			}
 		}
 
@@ -99,36 +81,14 @@ namespace MineSweeper
 			};
 			if (openFile.ShowDialog() == DialogResult.OK)
 			{
-				StreamReader reader = null;
-				bool open_file = false;
 				string fileName = openFile.FileName;
 
 				if (string.IsNullOrEmpty(fileName) || string.IsNullOrWhiteSpace(fileName))
 					return;
-				try
-				{
-					string str;
-					reader = new StreamReader(fileName, Encoding.Default);
-					str = reader.ReadLine();
-					string[] x = str.Split(';');
-					DifficultComboBox.SelectedIndex = int.Parse(x[0])-1;
-					if (int.Parse(x[1]) == 0)
-						MusicPlay = false;
-					else
-						MusicPlay = true;
-					MuzicButtonChange();
-
-					reader.Close();
-				}
-				catch (Exception)
-				{
-					MessageBox.Show("Ошибка при чтении файла!", "Ошибка");
-				}
-				finally
-				{
-					if (reader != null)
-						reader.Dispose();
-				}
+				if(inputName.Players.Count > 0)
+                {
+					inputName.Players = Leaderboard.LoadData(fileName).ToList();
+                }
 			}
 		}
 	}

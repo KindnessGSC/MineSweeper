@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Media;
 using System.Threading;
+using System.Linq;
 
 namespace MineSweeper
 {
@@ -24,6 +25,8 @@ namespace MineSweeper
         {
             InitializeComponent();
 
+            this.FormClosed += MainForm_FormClosed;
+
             StartPosition = FormStartPosition.CenterScreen;
 
             _field = new FieldUserControl(1, 35);
@@ -39,6 +42,14 @@ namespace MineSweeper
             Controls.Add(_label);
             Size = new Size(_field.FieldSize + widthOffset, _field.FieldSize + (toolStrip1.Height * 2) + heightOffset * 2);
             _field.Win += OnWin;
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(inputName.Players.Count > 0)
+            {
+                MineSweeper.Leaderboard.SaveData("save.dat", inputName.Players.ToArray());
+            }
         }
 
         private void SettingOpenClick(object sender, EventArgs e)
@@ -78,7 +89,7 @@ namespace MineSweeper
             timer1.Start();
             string musicPath = "Music1.wav";
             muzicPlayer = new SoundPlayer();
-
+            inputName.Players = MineSweeper.Leaderboard.LoadData("save.dat").ToList();
 
             try
             {

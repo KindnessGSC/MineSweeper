@@ -31,14 +31,14 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.title = new System.Windows.Forms.Label();
-            this.playersTable = new System.Windows.Forms.DataGridView();
-            this.playerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.easy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.normal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hard = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.playerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.difficultDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.playersTable)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -47,7 +47,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.title, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.playersTable, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -69,47 +69,50 @@
             this.title.Text = "Доска лидеров";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // playersTable
+            // playerBindingSource1
             // 
-            this.playersTable.AutoGenerateColumns = false;
-            this.playersTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.playersTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.easy,
-            this.normal,
-            this.hard});
-            this.playersTable.DataSource = this.playerBindingSource;
-            this.playersTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.playersTable.Location = new System.Drawing.Point(3, 54);
-            this.playersTable.Name = "playersTable";
-            this.playersTable.RowHeadersWidth = 51;
-            this.playersTable.RowTemplate.Height = 24;
-            this.playersTable.Size = new System.Drawing.Size(480, 288);
-            this.playersTable.TabIndex = 1;
+            this.playerBindingSource1.DataSource = typeof(MineSweeper.Player);
             // 
-            // playerBindingSource
+            // dataGridView1
             // 
-            this.playerBindingSource.DataSource = typeof(MineSweeper.Player);
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameDataGridViewTextBoxColumn,
+            this.timeDataGridViewTextBoxColumn,
+            this.difficultDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.playerBindingSource1;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 54);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(480, 288);
+            this.dataGridView1.TabIndex = 1;
             // 
-            // easy
+            // nameDataGridViewTextBoxColumn
             // 
-            this.easy.HeaderText = "Легко";
-            this.easy.MinimumWidth = 6;
-            this.easy.Name = "easy";
-            this.easy.Width = 125;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.Width = 125;
             // 
-            // normal
+            // timeDataGridViewTextBoxColumn
             // 
-            this.normal.HeaderText = "Hормально";
-            this.normal.MinimumWidth = 6;
-            this.normal.Name = "normal";
-            this.normal.Width = 125;
+            this.timeDataGridViewTextBoxColumn.DataPropertyName = "Time";
+            this.timeDataGridViewTextBoxColumn.HeaderText = "Time";
+            this.timeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.timeDataGridViewTextBoxColumn.Name = "timeDataGridViewTextBoxColumn";
+            this.timeDataGridViewTextBoxColumn.Width = 125;
             // 
-            // hard
+            // difficultDataGridViewTextBoxColumn
             // 
-            this.hard.HeaderText = "Cложно";
-            this.hard.MinimumWidth = 6;
-            this.hard.Name = "hard";
-            this.hard.Width = 125;
+            this.difficultDataGridViewTextBoxColumn.DataPropertyName = "Difficult";
+            this.difficultDataGridViewTextBoxColumn.HeaderText = "Difficult";
+            this.difficultDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.difficultDataGridViewTextBoxColumn.Name = "difficultDataGridViewTextBoxColumn";
+            this.difficultDataGridViewTextBoxColumn.Width = 125;
             // 
             // Leaderboard
             // 
@@ -121,8 +124,8 @@
             this.Text = "Leaderboard";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.playersTable)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -131,10 +134,10 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label title;
-        private System.Windows.Forms.BindingSource playerBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn easy;
-        private System.Windows.Forms.DataGridViewTextBoxColumn normal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hard;
-        public System.Windows.Forms.DataGridView playersTable;
+        private System.Windows.Forms.BindingSource playerBindingSource1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn timeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn difficultDataGridViewTextBoxColumn;
     }
 }
