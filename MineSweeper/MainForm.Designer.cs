@@ -38,6 +38,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSettingButton = new System.Windows.Forms.ToolStripButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.RulesoftheGame = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +61,8 @@
             this.MenuButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.новаяИграToolStripMenuItem,
             this.Leaderboard,
-            this.Exit});
+            this.Exit,
+            this.RulesoftheGame});
             this.MenuButton.Image = ((System.Drawing.Image)(resources.GetObject("MenuButton.Image")));
             this.MenuButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MenuButton.Name = "MenuButton";
@@ -107,6 +109,12 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // RulesoftheGame
+            // 
+            this.RulesoftheGame.Name = "RulesoftheGame";
+            this.RulesoftheGame.Size = new System.Drawing.Size(197, 22);
+            this.RulesoftheGame.Text = "Правила игры";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,6 +144,7 @@
         private System.Windows.Forms.ToolStripMenuItem Leaderboard;
         private System.Windows.Forms.ToolStripMenuItem Exit;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem RulesoftheGame;
     }
 }
 
