@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace MineSweeper
@@ -53,12 +54,43 @@ namespace MineSweeper
 				MuzicButton.Text = "Выкл";
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void SaveButton_Click(object sender, EventArgs e)
 		{
+			string fileName = null;
+			SaveFileDialog saveFile = new SaveFileDialog
+			{
+				Filter = "Текстовые файлы *.txt|*.txt|Все файлы|*.*",
+				FilterIndex = 1
+			};
+			if (saveFile.ShowDialog() == DialogResult.OK)
+				fileName = saveFile.FileName;
+			StreamWriter writer = null;
+			bool save_file = false;
+			if (string.IsNullOrEmpty(fileName) || string.IsNullOrWhiteSpace(fileName))
+				return;
+			try
+			{
+				writer = new StreamWriter(fileName, false, Encoding.Default);
+				if(MusicPlay)
+					writer.WriteLine($"{DifficultComboBox.SelectedIndex + 1};{1}");
+				else
+					writer.WriteLine($"{DifficultComboBox.SelectedIndex + 1};{0}");
 
+				writer.Close();
+				save_file = true;
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("Ошибка при сохранение файла!", "Ошибка");
+			}
+			finally
+			{
+				if (writer != null)
+					writer.Dispose();
+			}
 		}
 
-		private void SaveButton_Click(object sender, EventArgs e)
+		private void LoadButton_Click(object sender, EventArgs e)
 		{
 
 		}

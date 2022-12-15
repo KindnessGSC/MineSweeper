@@ -144,7 +144,7 @@ namespace MineSweeper
 			this.LoadButton.TabIndex = 4;
 			this.LoadButton.Text = "Загрузить";
 			this.LoadButton.UseVisualStyleBackColor = true;
-			this.LoadButton.Click += new System.EventHandler(this.button1_Click);
+			this.LoadButton.Click += new System.EventHandler(this.LoadButton_Click);
 			// 
 			// SaveButton
 			// 
