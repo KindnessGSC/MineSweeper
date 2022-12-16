@@ -34,8 +34,8 @@
             this.MenuButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.новаяИграToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Leaderboard = new System.Windows.Forms.ToolStripMenuItem();
-            this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.RulesoftheGame = new System.Windows.Forms.ToolStripMenuItem();
+            this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSettingButton = new System.Windows.Forms.ToolStripButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -61,8 +61,8 @@
             this.MenuButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.новаяИграToolStripMenuItem,
             this.Leaderboard,
-            this.Exit,
-            this.RulesoftheGame});
+            this.RulesoftheGame,
+            this.Exit});
             this.MenuButton.Image = ((System.Drawing.Image)(resources.GetObject("MenuButton.Image")));
             this.MenuButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MenuButton.Name = "MenuButton";
@@ -83,19 +83,19 @@
             this.Leaderboard.Text = "Рейтинг победителей";
             this.Leaderboard.Click += new System.EventHandler(this.Leaderboard_Click);
             // 
-            // Exit
-            // 
-            this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(197, 22);
-            this.Exit.Text = "Выход из приложения";
-            this.Exit.Click += new System.EventHandler(this.Exit_Click);
-            // 
             // RulesoftheGame
             // 
             this.RulesoftheGame.Name = "RulesoftheGame";
             this.RulesoftheGame.Size = new System.Drawing.Size(197, 22);
             this.RulesoftheGame.Text = "Правила игры";
             this.RulesoftheGame.Click += new System.EventHandler(this.RulesoftheGame_Click);
+            // 
+            // Exit
+            // 
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(197, 22);
+            this.Exit.Text = "Выход из приложения";
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // toolStripSeparator1
             // 
@@ -143,9 +143,9 @@
 		private System.Windows.Forms.ToolStripButton toolStripSettingButton;
         private System.Windows.Forms.ToolStripMenuItem новаяИграToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Leaderboard;
-        private System.Windows.Forms.ToolStripMenuItem Exit;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem RulesoftheGame;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem Exit;
     }
 }
 
