@@ -36,18 +36,20 @@ namespace MineSweeper
             // label
             // 
             this.label.AutoSize = true;
-            this.label.Location = new System.Drawing.Point(12, 23);
+            this.label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label.Location = new System.Drawing.Point(12, 9);
             this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(444, 52);
+            this.label.Size = new System.Drawing.Size(559, 64);
             this.label.TabIndex = 0;
             this.label.Text = resources.GetString("label.Text");
             // 
             // Rules
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 103);
+            this.ClientSize = new System.Drawing.Size(580, 92);
             this.Controls.Add(this.label);
+            this.Font = new System.Drawing.Font("Showcard Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Rules";
             this.Text = "Правила игры";
             this.ResumeLayout(false);
