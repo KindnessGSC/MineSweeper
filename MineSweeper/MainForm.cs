@@ -89,7 +89,7 @@ namespace MineSweeper
                     i = 0;
                     _field.ChangeDiffucltly(form.difficult);
                     Size = new Size(_field.FieldSize + widthOffset, _field.FieldSize + (toolStrip1.Height * 2) + heightOffset * 2);
-                    if(form.difficult == 1) _timerLabel.Location = new Point(Width - (Width / 2) + 5, _timerLabel.Location.Y + toolStrip1.Height);
+                    if(form.difficult == 1) _timerLabel.Location = new Point(Width - (Width / 3) + 15, _timerLabel.Location.Y);
                     else if(form.difficult == 2) _timerLabel.Location = new Point(Width - (Width / 5), _timerLabel.Location.Y);
                     else if(form.difficult == 3) _timerLabel.Location = new Point(Width - (Width / 6) + 20, _timerLabel.Location.Y);
                     timer1.Start();

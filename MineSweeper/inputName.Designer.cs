@@ -47,7 +47,7 @@
             // NameTextBox
             // 
             this.NameTextBox.Location = new System.Drawing.Point(195, 37);
-            this.NameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(312, 22);
             this.NameTextBox.TabIndex = 1;
@@ -56,7 +56,7 @@
             // OkButton
             // 
             this.OkButton.Location = new System.Drawing.Point(408, 103);
-            this.OkButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.OkButton.Margin = new System.Windows.Forms.Padding(4);
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(100, 28);
             this.OkButton.TabIndex = 2;
@@ -73,9 +73,9 @@
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "inputName";
-            this.Text = "Введите ваш никнейм";
+            this.Text = "Ввод имени";
             this.ResumeLayout(false);
             this.PerformLayout();
 
