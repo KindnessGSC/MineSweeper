@@ -36,18 +36,22 @@ namespace MineSweeper
             // label
             // 
             this.label.AutoSize = true;
-            this.label.Location = new System.Drawing.Point(12, 23);
+            this.label.Location = new System.Drawing.Point(16, 28);
+            this.label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(444, 52);
+            this.label.Size = new System.Drawing.Size(558, 64);
             this.label.TabIndex = 0;
             this.label.Text = resources.GetString("label.Text");
             // 
             // Rules
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 103);
+            this.ClientSize = new System.Drawing.Size(625, 127);
             this.Controls.Add(this.label);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Rules";
             this.Text = "Правила игры";
             this.ResumeLayout(false);

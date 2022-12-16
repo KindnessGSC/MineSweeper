@@ -29,16 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Leaderboard));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.title = new System.Windows.Forms.Label();
-            this.playerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.difficultDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.playerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -61,17 +62,13 @@
             // 
             this.title.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.title.AutoSize = true;
-            this.title.Font = new System.Drawing.Font("Stencil", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.title.Location = new System.Drawing.Point(90, 2);
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Location = new System.Drawing.Point(89, 2);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(306, 47);
+            this.title.Size = new System.Drawing.Size(307, 46);
             this.title.TabIndex = 0;
             this.title.Text = "Доска лидеров";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // playerBindingSource1
-            // 
-            this.playerBindingSource1.DataSource = typeof(MineSweeper.Player);
             // 
             // dataGridView1
             // 
@@ -114,18 +111,23 @@
             this.difficultDataGridViewTextBoxColumn.Name = "difficultDataGridViewTextBoxColumn";
             this.difficultDataGridViewTextBoxColumn.Width = 125;
             // 
+            // playerBindingSource1
+            // 
+            this.playerBindingSource1.DataSource = typeof(MineSweeper.Player);
+            // 
             // Leaderboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(486, 345);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Leaderboard";
             this.Text = "Leaderboard";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
