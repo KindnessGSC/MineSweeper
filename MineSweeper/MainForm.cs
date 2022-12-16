@@ -185,5 +185,14 @@ namespace MineSweeper
         {
             i = 0;
         }
+
+        private void RulesoftheGame_Click(object sender, EventArgs e)
+        {
+            
+                //открытие правил игры
+                Rules form = new Rules();
+                form.ShowDialog();
+            
+        }
     }
 }

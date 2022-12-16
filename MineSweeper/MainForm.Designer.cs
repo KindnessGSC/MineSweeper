@@ -35,10 +35,10 @@
             this.новаяИграToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Leaderboard = new System.Windows.Forms.ToolStripMenuItem();
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.RulesoftheGame = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSettingButton = new System.Windows.Forms.ToolStripButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.RulesoftheGame = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,6 +90,13 @@
             this.Exit.Text = "Выход из приложения";
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
+            // RulesoftheGame
+            // 
+            this.RulesoftheGame.Name = "RulesoftheGame";
+            this.RulesoftheGame.Size = new System.Drawing.Size(197, 22);
+            this.RulesoftheGame.Text = "Правила игры";
+            this.RulesoftheGame.Click += new System.EventHandler(this.RulesoftheGame_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -108,12 +115,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // RulesoftheGame
-            // 
-            this.RulesoftheGame.Name = "RulesoftheGame";
-            this.RulesoftheGame.Size = new System.Drawing.Size(197, 22);
-            this.RulesoftheGame.Text = "Правила игры";
             // 
             // MainForm
             // 
